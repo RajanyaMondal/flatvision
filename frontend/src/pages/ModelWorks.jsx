@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { BrainCircuit, Building2, Cpu, ArrowLeft, ArrowRight, Activity, LineChart, ShieldAlert, Loader2 } from 'lucide-react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell, ScatterChart, Scatter, CartesianGrid } from 'recharts';
-import api from '../utils/api';
 
 const MotionLink = motion(Link);
 
@@ -15,15 +14,13 @@ export default function ModelWorks() {
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
-        const res = await api.get('/model-metrics');
-        if (res.data && res.data.success) {
-          setMetrics(res.data.metrics);
-        } else {
-          setError(true);
-        }
+        const mlServiceUrl = import.meta.env.VITE_ML_SERVICE_URL || 'http://localhost:8000';
+        const res = await fetch(`${mlServiceUrl}/metrics`);
+        if (!res.ok) throw new Error('Failed to load metrics');
+        const data = await res.json();
+        setMetrics(data);
       } catch (err) {
-        console.error('Failed to fetch ML metrics:', err);
-        setError(true);
+        console.error("Failed to load model metrics:", err);
       } finally {
         setLoading(false);
       }

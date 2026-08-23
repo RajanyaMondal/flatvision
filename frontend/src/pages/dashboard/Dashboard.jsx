@@ -3,7 +3,6 @@ import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { LayoutDashboard, History as HistoryIcon, User, LogOut, Building2, Menu, X, BrainCircuit, Home } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import api from '../../utils/api';
 
 const MotionLink = motion(Link);
 
@@ -12,21 +11,7 @@ export default function Dashboard() {
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [dbType, setDbType] = useState('');
-
-  useEffect(() => {
-    const fetchDbStatus = async () => {
-      try {
-        const res = await api.get('/health');
-        if (res.data && res.data.database) {
-          setDbType(res.data.database);
-        }
-      } catch (err) {
-        console.error('Error fetching database status:', err);
-      }
-    };
-    fetchDbStatus();
-  }, []);
+  const dbType = 'Supabase DB';
 
   const navItems = [
     { name: 'Back to Home', path: '/', icon: Home },
@@ -50,7 +35,7 @@ export default function Dashboard() {
         </Link>
         <div className="mb-8">
           <p className="text-xs text-[#7C6274] font-bold">Welcome back,</p>
-          <p className="font-bold text-[#2E1128] text-lg truncate">{user?.name}</p>
+          <p className="font-bold text-[#2E1128] text-lg truncate">{user?.user_metadata?.name || user?.email?.split('@')[0]}</p>
         </div>
         <nav className="space-y-2.5">
           {navItems.map((item) => {
@@ -105,16 +90,10 @@ export default function Dashboard() {
             <Building2 className="text-[#FF8CD9]" />
             <span className="text-[#2E1128] font-black">FlatVision<span className="text-[#FF73D0]">.AI</span></span>
           </Link>
-          {dbType && (
-            <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${
-              dbType.includes('Mock') 
-                ? 'bg-amber-50 text-amber-700 border-amber-250' 
-                : 'bg-emerald-50 text-emerald-700 border-emerald-250'
-            }`}>
-              <span className={`w-1.5 h-1.5 rounded-full ${dbType.includes('Mock') ? 'bg-amber-500' : 'bg-emerald-500'}`} />
-              {dbType.includes('Mock') ? 'Mock DB' : 'MongoDB'}
-            </span>
-          )}
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold border bg-emerald-50 text-emerald-700 border-emerald-250">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            {dbType}
+          </span>
         </div>
         <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 text-[#2E1128]">
           {mobileMenuOpen ? <X /> : <Menu />}
@@ -143,19 +122,13 @@ export default function Dashboard() {
         <header className="hidden md:flex h-16 bg-white/20 backdrop-blur-md border-b border-[#FFD6F4] items-center justify-between px-8 shadow-sm">
           <div className="flex items-center gap-4">
             <h2 className="text-xl font-black text-[#2E1128]">Dashboard</h2>
-            {dbType && (
-              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${
-                dbType.includes('Mock') 
-                  ? 'bg-amber-50 text-amber-700 border-amber-250' 
-                  : 'bg-emerald-50 text-emerald-700 border-emerald-250'
-              }`}>
-                <span className={`w-2 h-2 rounded-full ${dbType.includes('Mock') ? 'bg-amber-500 animate-pulse' : 'bg-emerald-500 animate-pulse'}`} />
-                DB Connection: {dbType}
-              </span>
-            )}
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border bg-emerald-50 text-emerald-700 border-emerald-250">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              DB Connection: {dbType}
+            </span>
           </div>
           <div className="flex items-center gap-4">
-            <span className="font-bold text-[#7C6274]">Hello, {user?.name || 'User'}</span>
+            <span className="font-bold text-[#7C6274]">Hello, {user?.user_metadata?.name || user?.email?.split('@')[0]}</span>
             <motion.button 
               onClick={handleLogout}
               whileHover={{ scale: 1.02 }}

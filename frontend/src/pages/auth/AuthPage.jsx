@@ -1,12 +1,40 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { SignIn, SignUp } from '@clerk/clerk-react';
+import React, { useState, useContext } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Home, Sparkles } from 'lucide-react';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function AuthPage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const isRegister = queryParams.get('mode') === 'register';
+
+  const { login, register } = useContext(AuthContext);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    try {
+      if (isRegister) {
+        await register(email, password, name);
+      } else {
+        await login(email, password);
+      }
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.message || 'An error occurred during authentication');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div
@@ -27,51 +55,65 @@ export default function AuthPage() {
 
         {/* Left Form Panel */}
         <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center items-center min-h-[500px]">
-          <div className="mb-6 text-center">
+          <div className="mb-6 text-center w-full max-w-sm">
             <h2 className="text-2xl font-black text-[#2E1128] tracking-tight mb-1">Welcome to FlatVision</h2>
             <p className="text-[#7C6274] text-xs font-semibold">Trained Linear Regression property valuations.</p>
           </div>
 
           <div className="w-full flex justify-center">
-            {isRegister ? (
-              <SignUp
-                signInUrl="/auth?mode=login"
-                forceRedirectUrl="/dashboard"
-                appearance={{
-                  elements: {
-                    cardBox: "shadow-none border-none p-0 bg-transparent w-full max-w-sm",
-                    card: "shadow-none border-none p-0 bg-transparent w-full max-w-sm",
-                    headerTitle: "hidden",
-                    headerSubtitle: "hidden",
-                    footerActionLink: "text-sm text-[#7C6274] hover:text-[#FF73D0] font-bold",
-                    formButtonPrimary: "bg-[#FF8CD9] hover:bg-[#FF73D0] text-sm font-bold rounded-xl py-2.5 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-md shadow-[#FF8CD9]/10",
-                    formFieldInput: "bg-[#FFF5FA] border-[#FFD6F4] rounded-xl py-2.5 text-[#2E1128]",
-                    socialButtonsBlockButton: "border-[#FFD6F4] rounded-xl py-2.5 hover:bg-[#FFF5FA] transition-all hover:scale-102 cursor-pointer",
-                    socialButtonsBlockButtonText: "font-bold text-[#2E1128]",
-                    footer: "bg-transparent",
-                  }
-                }}
+            <form onSubmit={handleSubmit} className="w-full max-w-sm flex flex-col gap-4">
+              {error && (
+                <div className="bg-red-50 text-red-500 text-sm p-3 rounded-xl border border-red-100">
+                  {error}
+                </div>
+              )}
+              
+              {isRegister && (
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="bg-[#FFF5FA] border border-[#FFD6F4] rounded-xl py-2.5 px-4 text-[#2E1128] outline-none focus:border-[#FF8CD9] focus:ring-2 focus:ring-[#FF8CD9]/20 transition-all"
+                />
+              )}
+              
+              <input
+                type="email"
+                placeholder="Email address"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-[#FFF5FA] border border-[#FFD6F4] rounded-xl py-2.5 px-4 text-[#2E1128] outline-none focus:border-[#FF8CD9] focus:ring-2 focus:ring-[#FF8CD9]/20 transition-all"
               />
-            ) : (
-              <SignIn
-                signUpUrl="/auth?mode=register"
-                forceRedirectUrl="/dashboard"
-                appearance={{
-                  elements: {
-                    cardBox: "shadow-none border-none p-0 bg-transparent w-full max-w-sm",
-                    card: "shadow-none border-none p-0 bg-transparent w-full max-w-sm",
-                    headerTitle: "hidden",
-                    headerSubtitle: "hidden",
-                    footerActionLink: "text-sm text-[#7C6274] hover:text-[#FF73D0] font-bold",
-                    formButtonPrimary: "bg-[#FF8CD9] hover:bg-[#FF73D0] text-sm font-bold rounded-xl py-2.5 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-md shadow-[#FF8CD9]/10",
-                    formFieldInput: "bg-[#FFF5FA] border-[#FFD6F4] rounded-xl py-2.5 text-[#2E1128]",
-                    socialButtonsBlockButton: "border-[#FFD6F4] rounded-xl py-2.5 hover:bg-[#FFF5FA] transition-all hover:scale-102 cursor-pointer",
-                    socialButtonsBlockButtonText: "font-bold text-[#2E1128]",
-                    footer: "bg-transparent",
-                  }
-                }}
+              
+              <input
+                type="password"
+                placeholder="Password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="bg-[#FFF5FA] border border-[#FFD6F4] rounded-xl py-2.5 px-4 text-[#2E1128] outline-none focus:border-[#FF8CD9] focus:ring-2 focus:ring-[#FF8CD9]/20 transition-all"
               />
-            )}
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-[#FF8CD9] hover:bg-[#FF73D0] text-white text-sm font-bold rounded-xl py-3 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-md shadow-[#FF8CD9]/10 mt-2 disabled:opacity-70 disabled:pointer-events-none"
+              >
+                {loading ? 'Processing...' : (isRegister ? 'Sign Up' : 'Sign In')}
+              </button>
+              
+              <div className="text-center mt-2">
+                <Link
+                  to={isRegister ? "/auth?mode=login" : "/auth?mode=register"}
+                  className="text-sm text-[#7C6274] hover:text-[#FF73D0] font-bold"
+                >
+                  {isRegister ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
+                </Link>
+              </div>
+            </form>
           </div>
         </div>
 

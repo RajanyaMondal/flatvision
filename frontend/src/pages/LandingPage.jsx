@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Building2, ArrowRight, BrainCircuit, Activity, SlidersHorizontal, Search, ArrowUpDown, Mail, Database, Landmark, Layers, Layout } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
-import api from '../utils/api';
 
 const MotionLink = motion(Link);
 
@@ -17,10 +16,11 @@ export default function LandingPage() {
   useEffect(() => {
     const fetchDataset = async () => {
       try {
-        const res = await api.get('/dataset-data');
-        if (res.data && res.data.success) {
-          setDataset(res.data.data);
-        }
+        const mlServiceUrl = import.meta.env.VITE_ML_SERVICE_URL || 'http://localhost:8000';
+        const res = await fetch(`${mlServiceUrl}/dataset-data`);
+        if (!res.ok) throw new Error('Failed to load dataset');
+        const data = await res.json();
+        setDataset(data);
       } catch (err) {
         console.error("Failed to load dataset:", err);
         setError('Failed to fetch dataset information.');
@@ -305,9 +305,9 @@ export default function LandingPage() {
               </p>
               
               <div className="space-y-3 text-sm text-[#7C6274] font-bold">
-                <div>Core Node: Port 5000 (Express Router)</div>
-                <div>AI Engine: Port 8000 (FastAPI Model)</div>
-                <div>Storage: MongoDB / Local Fallback cache</div>
+                <div>Backend & DB: Supabase (Auth & PostgreSQL)</div>
+                <div>AI Engine: Python / FastAPI Microservice</div>
+                <div>Frontend: React, Vite, Framer Motion</div>
               </div>
             </div>
 

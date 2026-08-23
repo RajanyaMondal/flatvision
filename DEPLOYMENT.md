@@ -1,6 +1,6 @@
 # FlatVision.AI Deployment Guide
 
-This guide provides step-by-step instructions to deploy the entire FlatVision.AI stack to production.
+This guide provides step-by-step instructions to deploy the entire FlatVision.AI stack to production using a serverless architecture.
 
 ---
 
@@ -9,21 +9,29 @@ This guide provides step-by-step instructions to deploy the entire FlatVision.AI
 ```mermaid
 graph TD
     User([Browser Client]) -->|Interacts with UI| Frontend[Frontend: React + Vite]
-    Frontend -->|Queries API /api| Backend[Backend: Express.js API Gateway]
-    Backend -->|Requests predictions| MLService[ML Service: Python FastAPI]
-    Backend -->|Persists credentials & history| DB[(Database: MongoDB Atlas / JSON Fallback)]
+    Frontend -->|Supabase Auth & DB queries| Supabase[(Supabase: PostgreSQL & Auth)]
+    Frontend -->|Prediction Requests| MLService[ML Service: Python FastAPI]
 ```
 
-- **Frontend** (React/Vite): Deployed on **Vercel**.
-- **Backend** (Node.js/Express): Deployed on **Render** (Web Service).
+- **Frontend** (React/Vite): Deployed on **Vercel** or **Netlify**.
+- **Backend/Database**: **Supabase** (Handles Authentication and PostgreSQL Database).
 - **ML Service** (Python/FastAPI): Deployed on **Render** (Web Service).
-- **Database**: **MongoDB Atlas** (Recommended for production persistence) or local `db.json` fallback.
 
 ---
 
-## Phase 1: Deploy the ML Service (FastAPI) on Render
+## Phase 1: Set up Supabase (Auth & Database)
 
-First, deploy the machine learning microservice so the backend has a URL to connect to.
+1. **Sign In**: Log into your [Supabase Dashboard](https://supabase.com/dashboard).
+2. **New Project**: Create a new project and configure your database password.
+3. **Database Schema**: Go to the SQL Editor in your new project and run the provided schema (located in `supabase_schema.sql` at the project root) to create the `predictions` table and apply Row-Level Security (RLS) policies.
+4. **Authentication**: Supabase Email/Password authentication is enabled by default. You do not need additional setup for basic auth.
+5. **API Keys**: Go to **Project Settings -> API**. Copy your **Project URL** and **anon public** API key. You will need these for the frontend.
+
+---
+
+## Phase 2: Deploy the ML Service (FastAPI) on Render
+
+Deploy the machine learning microservice so the frontend has a URL to connect to.
 
 1. **Sign In**: Log into your [Render Dashboard](https://dashboard.render.com).
 2. **New Service**: Click **New +** and select **Web Service**.
@@ -40,36 +48,9 @@ First, deploy the machine learning microservice so the backend has a URL to conn
 
 ---
 
-## Phase 2: Deploy the Backend API (Node.js) on Render
-
-Next, deploy the backend server that manages authentication and routes predictions.
-
-1. **New Service**: Click **New +** and select **Web Service**.
-2. **Connect Repository**: Connect your GitHub repository.
-3. **Configuration Settings**:
-   - **Name**: `flatvision-backend`
-   - **Environment**: `Node`
-   - **Root Directory**: `backend` *(Crucial: This tells Render to compile from the `backend/` subfolder)*
-   - **Build Command**: `npm install`
-   - **Start Command**: `node server.js`
-4. **Add Environment Variables**: Under the **Environment** tab, click **Add Environment Variable** and define:
-   
-   | Key | Value | Description |
-   | :--- | :--- | :--- |
-   | `PORT` | `10000` | Port for the backend service |
-   | `MONGO_URI` | `mongodb+srv://...` | *Highly Recommended:* Your MongoDB Atlas connection string. (If omitted, the backend will auto-fallback to `db.json` storage, but records will clear when the Render instance sleeps/restarts) |
-   | `JWT_SECRET` | `your_long_random_secure_secret_key` | Secret key for signing user tokens |
-   | `ML_SERVICE_URL` | `https://flatvision-ml.onrender.com` | The Render service URL you copied from **Phase 1** |
-   | `FRONTEND_URL` | `https://flatvision-ai.vercel.app` | The Vercel URL where your frontend will live (you will update this in Phase 3) |
-
-5. **Deploy**: Click **Create Web Service**.
-6. **Retrieve URL**: Once active, copy the generated backend URL (e.g. `https://flatvision-backend.onrender.com`).
-
----
-
 ## Phase 3: Deploy the Frontend (React + Vite) on Vercel
 
-Finally, deploy your React frontend to Vercel and hook it up to the Render backend.
+Finally, deploy your React frontend to Vercel and hook it up to Supabase and the Render ML Service.
 
 1. **Sign In**: Log into your [Vercel Dashboard](https://vercel.com).
 2. **Import Project**: Click **Add New** -> **Project**, and select your GitHub repository.
@@ -81,15 +62,17 @@ Finally, deploy your React frontend to Vercel and hook it up to the Render backe
 
    | Key | Value | Description |
    | :--- | :--- | :--- |
-   | `VITE_API_BASE_URL` | `https://flatvision-backend.onrender.com/api` | The Render backend API URL copied in **Phase 2** (appended with `/api`) |
-   | `VITE_CLERK_PUBLISHABLE_KEY` | `pk_test_...` | Your Clerk auth key (optional if using database authentication) |
+   | `VITE_SUPABASE_URL` | `https://your-project-id.supabase.co` | The Supabase Project URL from **Phase 1** |
+   | `VITE_SUPABASE_ANON_KEY` | `eyJhb...` | The Supabase anon public key from **Phase 1** |
+   | `VITE_ML_SERVICE_URL` | `https://flatvision-ml.onrender.com` | The Render service URL you copied from **Phase 2** |
 
 5. **Deploy**: Click **Deploy**.
-6. **Final Step**: Copy the Vercel URL (e.g., `https://flatvision-ai.vercel.app`) and add/update it as the `FRONTEND_URL` in your Render backend settings so CORS allows requests.
+6. **Final Step**: Once deployed, the frontend should now securely authenticate users with Supabase, store predictions in the PostgreSQL database, and get real-time price valuations from the FastAPI Python service!
 
 ---
 
 ## Troubleshooting & Verification
 
-- **Check Logs**: If predictions fail, view Render log outputs in both the `flatvision-backend` and `flatvision-ml` dashboards.
+- **Check Logs**: If predictions fail, view Render log outputs in the `flatvision-ml` dashboard.
 - **Spin-up Delay**: Free services on Render "spin down" after 15 minutes of inactivity. When visiting the website for the first time in a while, requests may take 30-50 seconds to respond as the containers wake up.
+- **Auth Errors**: Verify that your `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` environment variables are properly set in Vercel.

@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Calculator, X, BrainCircuit, Activity, LineChart as LineChartIcon, CheckCircle2, Loader2, ArrowUpDown, Search, SlidersHorizontal } from 'lucide-react';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import PredictionForm from './PredictionForm';
-import api from '../../utils/api';
 
 export default function DashboardHome() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,10 +26,11 @@ export default function DashboardHome() {
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
-        const res = await api.get('/model-metrics');
-        if (res.data && res.data.success) {
-          setMetrics(res.data.metrics);
-        }
+        const mlServiceUrl = import.meta.env.VITE_ML_SERVICE_URL || 'http://localhost:8000';
+        const res = await fetch(`${mlServiceUrl}/metrics`);
+        if (!res.ok) throw new Error('Failed to load metrics');
+        const data = await res.json();
+        setMetrics(data);
       } catch (err) {
         console.error("Failed to load model metrics:", err);
         setError('Failed to fetch model metrics.');
@@ -41,10 +41,11 @@ export default function DashboardHome() {
 
     const fetchDataset = async () => {
       try {
-        const res = await api.get('/dataset-data');
-        if (res.data && res.data.success) {
-          setDataset(res.data.data);
-        }
+        const mlServiceUrl = import.meta.env.VITE_ML_SERVICE_URL || 'http://localhost:8000';
+        const res = await fetch(`${mlServiceUrl}/dataset-data`);
+        if (!res.ok) throw new Error('Failed to load dataset');
+        const data = await res.json();
+        setDataset(data);
       } catch (err) {
         console.error("Failed to load dataset:", err);
         setDatasetError('Failed to fetch dataset information.');

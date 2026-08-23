@@ -1,72 +1,73 @@
 import React, { createContext, useState, useEffect, useMemo } from 'react';
-import { useUser, useClerk } from '@clerk/clerk-react';
-import api from '../utils/api';
+import { supabase } from '../utils/supabaseClient';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const { isSignedIn, user: clerkUser, isLoaded } = useUser();
-  const { signOut } = useClerk();
-
-  const [dbUser, setDbUser] = useState(null);
-  const [syncing, setSyncing] = useState(false);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const syncUser = async () => {
-      if (!isLoaded) return;
-
-      if (isSignedIn && clerkUser) {
-        setSyncing(true);
-        try {
-          const email = clerkUser.primaryEmailAddress?.emailAddress;
-          const name = clerkUser.fullName || clerkUser.username || email.split('@')[0];
-          
-          const res = await api.post('/auth/clerk-sync', {
-            clerkId: clerkUser.id,
-            email,
-            name
-          });
-
-          if (res.data && res.data.success) {
-            localStorage.setItem('token', res.data.token);
-            setDbUser(res.data.user);
-          }
-        } catch (err) {
-          console.error("Failed to sync Clerk user with backend:", err);
-          // If sync fails, fall back to setting local state based on Clerk user directly so the app remains usable
-          setDbUser({
-            _id: clerkUser.id,
-            name: clerkUser.fullName || clerkUser.username || "Clerk User",
-            email: clerkUser.primaryEmailAddress?.emailAddress,
-            role: 'user'
-          });
-        } finally {
-          setSyncing(false);
-        }
-      } else {
-        localStorage.removeItem('token');
-        setDbUser(null);
-      }
+    // Check active session
+    const getSession = async () => {
+      const { data: { session }, error } = await supabase.auth.getSession();
+      setUser(session?.user ?? null);
+      setLoading(false);
     };
 
-    syncUser();
-  }, [isSignedIn, clerkUser, isLoaded]);
+    getSession();
 
-  const logout = async () => {
-    try {
-      await signOut();
-      localStorage.removeItem('token');
-      setDbUser(null);
-    } catch (err) {
-      console.error("Error signing out from Clerk:", err);
-    }
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const login = async (email, password) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) throw error;
+    return data;
   };
 
-  const loading = !isLoaded || syncing;
+  const register = async (email, password, name) => {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          name: name,
+        },
+      },
+    });
+    if (error) throw error;
+    return data;
+  };
+
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+  };
+
+  const value = useMemo(() => ({
+    user,
+    loading,
+    login,
+    register,
+    logout,
+  }), [user, loading]);
 
   return (
-    <AuthContext.Provider value={{ user: dbUser, loading, register: () => {}, login: () => {}, logout }}>
-      {children}
+    <AuthContext.Provider value={value}>
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

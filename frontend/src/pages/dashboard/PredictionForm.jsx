@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import api from '../../utils/api';
+import { supabase } from '../../utils/supabaseClient';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Loader2, Calculator, MapPin, Building, Activity, Home, Award, SlidersHorizontal, ListChecks, Maximize2, Compass, Layers, Car, Bed, TrendingUp } from 'lucide-react';
 
@@ -30,12 +30,45 @@ export default function PredictionForm() {
     setError('');
     
     try {
-      const res = await api.post('/predictions', formData);
-      if (res.data.success) {
-        setResult(res.data.data);
-      }
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error('Not logged in');
+
+      const mlServiceUrl = import.meta.env.VITE_ML_SERVICE_URL || 'http://localhost:8000';
+      const mlResponse = await fetch(`${mlServiceUrl}/predict`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      
+      if (!mlResponse.ok) throw new Error('Prediction service is currently unavailable.');
+      const mlData = await mlResponse.json();
+
+      const newPrediction = {
+        user_id: user.id,
+        input_features: formData,
+        predicted_price: mlData.predicted_price,
+        model_name: mlData.model_name,
+        prediction_metadata: mlData.metadata
+      };
+
+      const { data, error: sbError } = await supabase
+        .from('predictions')
+        .insert([newPrediction])
+        .select()
+        .single();
+
+      if (sbError) throw sbError;
+
+      // Map back to result structure
+      setResult({
+        id: data.id,
+        inputFeatures: data.input_features,
+        predictedPrice: data.predicted_price,
+        predictionMetadata: data.prediction_metadata,
+        modelName: data.model_name
+      });
     } catch (err) {
-      setError(err.response?.data?.message || 'Prediction failed to generate. Please try again.');
+      setError(err.message || 'Prediction failed to generate. Please try again.');
     } finally {
       setLoading(false);
     }
