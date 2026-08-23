@@ -296,6 +296,15 @@
       "_id": "6wfe06yv8qr",
       "createdAt": "2026-08-23T17:48:41.625Z",
       "updatedAt": "2026-08-23T17:48:41.625Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "5l5sxbnatjr",
+      "createdAt": "2026-08-23T17:59:03.748Z",
+      "updatedAt": "2026-08-23T17:59:03.748Z"
     }
   ],
   "predictions": [
@@ -534,6 +543,65 @@
       "_id": "kwjohjw5bqq",
       "createdAt": "2026-08-23T17:12:41.072Z",
       "updatedAt": "2026-08-23T17:12:41.072Z"
+    },
+    {
+      "inputFeatures": {
+        "Area_Sqft": 1000,
+        "Facing": "North",
+        "Floor": 3,
+        "Car_Parking_Sqft": 120,
+        "Bedrooms": 2
+      },
+      "predictedPrice": 5324119.752091782,
+      "modelName": "Multiple Linear Regression",
+      "predictionMetadata": {
+        "r2_score": 0.9978752157731158,
+        "mae": 63126.81092674811,
+        "rmse": 80267.86462573525,
+        "intercept": -13.74596916466544,
+        "coefficients": {
+          "Facing_East": -0.29037937946730624,
+          "Facing_North": -0.3915869556904169,
+          "Facing_South": 0.7380982131282257,
+          "Facing_West": -0.05613187797049646,
+          "Area_Sqft": 0.06081275473811487,
+          "Floor": 0.437498791459337,
+          "Car_Parking_Sqft": 0.024505178503978767,
+          "Bedrooms": 1.156440554151674
+        },
+        "similar_properties": [
+          {
+            "Flat_ID": 33,
+            "Area_Sqft": 1010,
+            "Facing": "North",
+            "Floor": 3,
+            "Car_Parking_Sqft": 120,
+            "Bedrooms": 2,
+            "Price_Lakh": 55
+          },
+          {
+            "Flat_ID": 53,
+            "Area_Sqft": 1040,
+            "Facing": "North",
+            "Floor": 3,
+            "Car_Parking_Sqft": 120,
+            "Bedrooms": 2,
+            "Price_Lakh": 57
+          },
+          {
+            "Flat_ID": 13,
+            "Area_Sqft": 1020,
+            "Facing": "North",
+            "Floor": 4,
+            "Car_Parking_Sqft": 120,
+            "Bedrooms": 2,
+            "Price_Lakh": 56
+          }
+        ]
+      },
+      "_id": "flng0noqydh",
+      "createdAt": "2026-08-23T17:59:55.841Z",
+      "updatedAt": "2026-08-23T17:59:55.841Z"
     }
   ]
 }
