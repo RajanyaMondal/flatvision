@@ -1,28 +1,301 @@
 {
   "users": [
     {
-      "name": "Test User",
-      "email": "test@example.com",
-      "passwordHash": "$2b$10$P8B4Vf8v.vJf9mBxvQPTIeRshDXjHGkU6fj3HSR0YWct3ODelcCyy",
-      "_id": "tgjl9qhizi",
-      "createdAt": "2026-08-22T17:30:37.133Z",
-      "updatedAt": "2026-08-22T17:30:37.133Z"
-    },
-    {
-      "name": "Rajanya Mondal",
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
       "email": "raimondal636@gmail.com",
-      "passwordHash": "$2b$10$boHyzQjEpGzY3/6zXirnzuJ2pigYxx4bPs1iJsjRLlo4HPMtUuKQK",
-      "_id": "9icr4wfvcbb",
-      "createdAt": "2026-08-22T17:47:49.502Z",
-      "updatedAt": "2026-08-22T17:47:49.503Z"
+      "passwordHash": "clerk_authenticated",
+      "_id": "4j69xicxylg",
+      "createdAt": "2026-08-23T15:50:13.760Z",
+      "updatedAt": "2026-08-23T15:50:13.760Z"
     },
     {
-      "name": "Test User",
-      "email": "test2@example.com",
-      "passwordHash": "$2b$10$E2c50QmqcpcX.nzcGY2zDum5thiD.HFAVnynFjlNHI1vhrSNqlI3a",
-      "_id": "iz21lrknfw",
-      "createdAt": "2026-08-22T18:01:43.475Z",
-      "updatedAt": "2026-08-22T18:01:43.476Z"
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "qm91ilwijvj",
+      "createdAt": "2026-08-23T15:50:18.487Z",
+      "updatedAt": "2026-08-23T15:50:18.487Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "59daxm3rt7m",
+      "createdAt": "2026-08-23T16:03:21.129Z",
+      "updatedAt": "2026-08-23T16:03:21.129Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "qhn042hzoia",
+      "createdAt": "2026-08-23T16:47:41.780Z",
+      "updatedAt": "2026-08-23T16:47:41.780Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "4182xicydwe",
+      "createdAt": "2026-08-23T17:06:09.872Z",
+      "updatedAt": "2026-08-23T17:06:09.872Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "5evn05slnoe",
+      "createdAt": "2026-08-23T17:06:13.100Z",
+      "updatedAt": "2026-08-23T17:06:13.101Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "423iofc311j",
+      "createdAt": "2026-08-23T17:06:16.631Z",
+      "updatedAt": "2026-08-23T17:06:16.631Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "2nfc85ana12",
+      "createdAt": "2026-08-23T17:06:58.425Z",
+      "updatedAt": "2026-08-23T17:06:58.425Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "jarrx5s3ddj",
+      "createdAt": "2026-08-23T17:13:02.822Z",
+      "updatedAt": "2026-08-23T17:13:02.822Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "pd0o5mks13q",
+      "createdAt": "2026-08-23T17:15:31.506Z",
+      "updatedAt": "2026-08-23T17:15:31.506Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "plambqwxl4",
+      "createdAt": "2026-08-23T17:15:32.890Z",
+      "updatedAt": "2026-08-23T17:15:32.890Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "kqc9yfytvx",
+      "createdAt": "2026-08-23T17:15:34.395Z",
+      "updatedAt": "2026-08-23T17:15:34.395Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "xwa75x4kz5b",
+      "createdAt": "2026-08-23T17:15:36.033Z",
+      "updatedAt": "2026-08-23T17:15:36.033Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "nwrl6f7fr88",
+      "createdAt": "2026-08-23T17:15:37.959Z",
+      "updatedAt": "2026-08-23T17:15:37.959Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "i72wnzjl3cm",
+      "createdAt": "2026-08-23T17:15:39.937Z",
+      "updatedAt": "2026-08-23T17:15:39.937Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "tmh28w96mk",
+      "createdAt": "2026-08-23T17:15:41.115Z",
+      "updatedAt": "2026-08-23T17:15:41.115Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "t7zy6vac9k",
+      "createdAt": "2026-08-23T17:15:44.123Z",
+      "updatedAt": "2026-08-23T17:15:44.123Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "e2ww95nutia",
+      "createdAt": "2026-08-23T17:15:45.186Z",
+      "updatedAt": "2026-08-23T17:15:45.186Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "pt0ramzpyoq",
+      "createdAt": "2026-08-23T17:15:47.990Z",
+      "updatedAt": "2026-08-23T17:15:47.990Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "ijzfjnhc70h",
+      "createdAt": "2026-08-23T17:15:49.111Z",
+      "updatedAt": "2026-08-23T17:15:49.111Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "b132dlxleop",
+      "createdAt": "2026-08-23T17:15:50.213Z",
+      "updatedAt": "2026-08-23T17:15:50.214Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "qilva6a70fp",
+      "createdAt": "2026-08-23T17:15:51.634Z",
+      "updatedAt": "2026-08-23T17:15:51.634Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "exkgka86jy",
+      "createdAt": "2026-08-23T17:15:55.862Z",
+      "updatedAt": "2026-08-23T17:15:55.862Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "3ccl35ipnov",
+      "createdAt": "2026-08-23T17:16:00.381Z",
+      "updatedAt": "2026-08-23T17:16:00.381Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "rdes63luriq",
+      "createdAt": "2026-08-23T17:16:04.060Z",
+      "updatedAt": "2026-08-23T17:16:04.060Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "vuztcj2xlpn",
+      "createdAt": "2026-08-23T17:16:06.682Z",
+      "updatedAt": "2026-08-23T17:16:06.682Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "rcgjhsl5g9k",
+      "createdAt": "2026-08-23T17:16:10.414Z",
+      "updatedAt": "2026-08-23T17:16:10.414Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "7o8ua77hq0r",
+      "createdAt": "2026-08-23T17:16:14.098Z",
+      "updatedAt": "2026-08-23T17:16:14.098Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "z7y1je7pmvt",
+      "createdAt": "2026-08-23T17:22:15.703Z",
+      "updatedAt": "2026-08-23T17:22:15.703Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "c4wzbwe87h",
+      "createdAt": "2026-08-23T17:35:38.827Z",
+      "updatedAt": "2026-08-23T17:35:38.827Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "4l37zw2gas",
+      "createdAt": "2026-08-23T17:36:01.265Z",
+      "updatedAt": "2026-08-23T17:36:01.265Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "g1xhd8i7wd8",
+      "createdAt": "2026-08-23T17:36:10.555Z",
+      "updatedAt": "2026-08-23T17:36:10.555Z"
+    },
+    {
+      "clerkId": "user_3IJAeIKuy6MiQcIGdtBAWFten5T",
+      "name": "Rai Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "clerk_authenticated",
+      "_id": "6wfe06yv8qr",
+      "createdAt": "2026-08-23T17:48:41.625Z",
+      "updatedAt": "2026-08-23T17:48:41.625Z"
     }
   ],
   "predictions": [
@@ -81,68 +354,9 @@
           }
         ]
       },
-      "_id": "1b2qex5b7a2",
-      "createdAt": "2026-08-23T07:12:04.078Z",
-      "updatedAt": "2026-08-23T07:12:04.078Z"
-    },
-    {
-      "inputFeatures": {
-        "Area_Sqft": 1200,
-        "Facing": "North",
-        "Floor": 5,
-        "Car_Parking_Sqft": 150,
-        "Bedrooms": "3"
-      },
-      "predictedPrice": 6817034.196073052,
-      "modelName": "Multiple Linear Regression",
-      "predictionMetadata": {
-        "r2_score": 0.9978752157731158,
-        "mae": 63126.81092674811,
-        "rmse": 80267.86462573525,
-        "intercept": -13.74596916466544,
-        "coefficients": {
-          "Facing_East": -0.29037937946730624,
-          "Facing_North": -0.3915869556904169,
-          "Facing_South": 0.7380982131282257,
-          "Facing_West": -0.05613187797049646,
-          "Area_Sqft": 0.06081275473811487,
-          "Floor": 0.437498791459337,
-          "Car_Parking_Sqft": 0.024505178503978767,
-          "Bedrooms": 1.156440554151674
-        },
-        "similar_properties": [
-          {
-            "Flat_ID": 5,
-            "Area_Sqft": 1250,
-            "Facing": "North",
-            "Floor": 5,
-            "Car_Parking_Sqft": 140,
-            "Bedrooms": 3,
-            "Price_Lakh": 70
-          },
-          {
-            "Flat_ID": 65,
-            "Area_Sqft": 1270,
-            "Facing": "North",
-            "Floor": 5,
-            "Car_Parking_Sqft": 140,
-            "Bedrooms": 3,
-            "Price_Lakh": 72
-          },
-          {
-            "Flat_ID": 25,
-            "Area_Sqft": 1280,
-            "Facing": "North",
-            "Floor": 5,
-            "Car_Parking_Sqft": 140,
-            "Bedrooms": 3,
-            "Price_Lakh": 72
-          }
-        ]
-      },
-      "_id": "y0yqyqv7oym",
-      "createdAt": "2026-08-23T07:13:32.656Z",
-      "updatedAt": "2026-08-23T07:13:32.656Z"
+      "_id": "eu2doknx0c",
+      "createdAt": "2026-08-23T16:48:01.203Z",
+      "updatedAt": "2026-08-23T16:48:01.203Z"
     },
     {
       "inputFeatures": {
@@ -199,9 +413,127 @@
           }
         ]
       },
-      "_id": "ekukhkgxfa",
-      "createdAt": "2026-08-23T07:13:58.564Z",
-      "updatedAt": "2026-08-23T07:13:58.564Z"
+      "_id": "fma1vw9ggwn",
+      "createdAt": "2026-08-23T16:56:01.212Z",
+      "updatedAt": "2026-08-23T16:56:01.212Z"
+    },
+    {
+      "inputFeatures": {
+        "Area_Sqft": 1500,
+        "Facing": "East",
+        "Floor": 5,
+        "Car_Parking_Sqft": 150,
+        "Bedrooms": "3"
+      },
+      "predictedPrice": 8651537.595838808,
+      "modelName": "Multiple Linear Regression",
+      "predictionMetadata": {
+        "r2_score": 0.9978752157731158,
+        "mae": 63126.81092674811,
+        "rmse": 80267.86462573525,
+        "intercept": -13.74596916466544,
+        "coefficients": {
+          "Facing_East": -0.29037937946730624,
+          "Facing_North": -0.3915869556904169,
+          "Facing_South": 0.7380982131282257,
+          "Facing_West": -0.05613187797049646,
+          "Area_Sqft": 0.06081275473811487,
+          "Floor": 0.437498791459337,
+          "Car_Parking_Sqft": 0.024505178503978767,
+          "Bedrooms": 1.156440554151674
+        },
+        "similar_properties": [
+          {
+            "Flat_ID": 95,
+            "Area_Sqft": 1350,
+            "Facing": "East",
+            "Floor": 6,
+            "Car_Parking_Sqft": 150,
+            "Bedrooms": 3,
+            "Price_Lakh": 79
+          },
+          {
+            "Flat_ID": 55,
+            "Area_Sqft": 1240,
+            "Facing": "East",
+            "Floor": 5,
+            "Car_Parking_Sqft": 140,
+            "Bedrooms": 3,
+            "Price_Lakh": 69
+          },
+          {
+            "Flat_ID": 87,
+            "Area_Sqft": 1500,
+            "Facing": "East",
+            "Floor": 7,
+            "Car_Parking_Sqft": 160,
+            "Bedrooms": 3,
+            "Price_Lakh": 89
+          }
+        ]
+      },
+      "_id": "jc6j3my52o9",
+      "createdAt": "2026-08-23T17:01:51.495Z",
+      "updatedAt": "2026-08-23T17:01:51.495Z"
+    },
+    {
+      "inputFeatures": {
+        "Area_Sqft": 1000,
+        "Facing": "North",
+        "Floor": 3,
+        "Car_Parking_Sqft": 120,
+        "Bedrooms": 2
+      },
+      "predictedPrice": 5324119.752091782,
+      "modelName": "Multiple Linear Regression",
+      "predictionMetadata": {
+        "r2_score": 0.9978752157731158,
+        "mae": 63126.81092674811,
+        "rmse": 80267.86462573525,
+        "intercept": -13.74596916466544,
+        "coefficients": {
+          "Facing_East": -0.29037937946730624,
+          "Facing_North": -0.3915869556904169,
+          "Facing_South": 0.7380982131282257,
+          "Facing_West": -0.05613187797049646,
+          "Area_Sqft": 0.06081275473811487,
+          "Floor": 0.437498791459337,
+          "Car_Parking_Sqft": 0.024505178503978767,
+          "Bedrooms": 1.156440554151674
+        },
+        "similar_properties": [
+          {
+            "Flat_ID": 33,
+            "Area_Sqft": 1010,
+            "Facing": "North",
+            "Floor": 3,
+            "Car_Parking_Sqft": 120,
+            "Bedrooms": 2,
+            "Price_Lakh": 55
+          },
+          {
+            "Flat_ID": 53,
+            "Area_Sqft": 1040,
+            "Facing": "North",
+            "Floor": 3,
+            "Car_Parking_Sqft": 120,
+            "Bedrooms": 2,
+            "Price_Lakh": 57
+          },
+          {
+            "Flat_ID": 13,
+            "Area_Sqft": 1020,
+            "Facing": "North",
+            "Floor": 4,
+            "Car_Parking_Sqft": 120,
+            "Bedrooms": 2,
+            "Price_Lakh": 56
+          }
+        ]
+      },
+      "_id": "kwjohjw5bqq",
+      "createdAt": "2026-08-23T17:12:41.072Z",
+      "updatedAt": "2026-08-23T17:12:41.072Z"
     }
   ]
 }
