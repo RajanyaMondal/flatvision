@@ -1,0 +1,207 @@
+{
+  "users": [
+    {
+      "name": "Test User",
+      "email": "test@example.com",
+      "passwordHash": "$2b$10$P8B4Vf8v.vJf9mBxvQPTIeRshDXjHGkU6fj3HSR0YWct3ODelcCyy",
+      "_id": "tgjl9qhizi",
+      "createdAt": "2026-08-22T17:30:37.133Z",
+      "updatedAt": "2026-08-22T17:30:37.133Z"
+    },
+    {
+      "name": "Rajanya Mondal",
+      "email": "raimondal636@gmail.com",
+      "passwordHash": "$2b$10$boHyzQjEpGzY3/6zXirnzuJ2pigYxx4bPs1iJsjRLlo4HPMtUuKQK",
+      "_id": "9icr4wfvcbb",
+      "createdAt": "2026-08-22T17:47:49.502Z",
+      "updatedAt": "2026-08-22T17:47:49.503Z"
+    },
+    {
+      "name": "Test User",
+      "email": "test2@example.com",
+      "passwordHash": "$2b$10$E2c50QmqcpcX.nzcGY2zDum5thiD.HFAVnynFjlNHI1vhrSNqlI3a",
+      "_id": "iz21lrknfw",
+      "createdAt": "2026-08-22T18:01:43.475Z",
+      "updatedAt": "2026-08-22T18:01:43.476Z"
+    }
+  ],
+  "predictions": [
+    {
+      "inputFeatures": {
+        "Area_Sqft": 1000,
+        "Facing": "North",
+        "Floor": 3,
+        "Car_Parking_Sqft": 120,
+        "Bedrooms": 2
+      },
+      "predictedPrice": 5324119.752091782,
+      "modelName": "Multiple Linear Regression",
+      "predictionMetadata": {
+        "r2_score": 0.9978752157731158,
+        "mae": 63126.81092674811,
+        "rmse": 80267.86462573525,
+        "intercept": -13.74596916466544,
+        "coefficients": {
+          "Facing_East": -0.29037937946730624,
+          "Facing_North": -0.3915869556904169,
+          "Facing_South": 0.7380982131282257,
+          "Facing_West": -0.05613187797049646,
+          "Area_Sqft": 0.06081275473811487,
+          "Floor": 0.437498791459337,
+          "Car_Parking_Sqft": 0.024505178503978767,
+          "Bedrooms": 1.156440554151674
+        },
+        "similar_properties": [
+          {
+            "Flat_ID": 33,
+            "Area_Sqft": 1010,
+            "Facing": "North",
+            "Floor": 3,
+            "Car_Parking_Sqft": 120,
+            "Bedrooms": 2,
+            "Price_Lakh": 55
+          },
+          {
+            "Flat_ID": 53,
+            "Area_Sqft": 1040,
+            "Facing": "North",
+            "Floor": 3,
+            "Car_Parking_Sqft": 120,
+            "Bedrooms": 2,
+            "Price_Lakh": 57
+          },
+          {
+            "Flat_ID": 13,
+            "Area_Sqft": 1020,
+            "Facing": "North",
+            "Floor": 4,
+            "Car_Parking_Sqft": 120,
+            "Bedrooms": 2,
+            "Price_Lakh": 56
+          }
+        ]
+      },
+      "_id": "1b2qex5b7a2",
+      "createdAt": "2026-08-23T07:12:04.078Z",
+      "updatedAt": "2026-08-23T07:12:04.078Z"
+    },
+    {
+      "inputFeatures": {
+        "Area_Sqft": 1200,
+        "Facing": "North",
+        "Floor": 5,
+        "Car_Parking_Sqft": 150,
+        "Bedrooms": "3"
+      },
+      "predictedPrice": 6817034.196073052,
+      "modelName": "Multiple Linear Regression",
+      "predictionMetadata": {
+        "r2_score": 0.9978752157731158,
+        "mae": 63126.81092674811,
+        "rmse": 80267.86462573525,
+        "intercept": -13.74596916466544,
+        "coefficients": {
+          "Facing_East": -0.29037937946730624,
+          "Facing_North": -0.3915869556904169,
+          "Facing_South": 0.7380982131282257,
+          "Facing_West": -0.05613187797049646,
+          "Area_Sqft": 0.06081275473811487,
+          "Floor": 0.437498791459337,
+          "Car_Parking_Sqft": 0.024505178503978767,
+          "Bedrooms": 1.156440554151674
+        },
+        "similar_properties": [
+          {
+            "Flat_ID": 5,
+            "Area_Sqft": 1250,
+            "Facing": "North",
+            "Floor": 5,
+            "Car_Parking_Sqft": 140,
+            "Bedrooms": 3,
+            "Price_Lakh": 70
+          },
+          {
+            "Flat_ID": 65,
+            "Area_Sqft": 1270,
+            "Facing": "North",
+            "Floor": 5,
+            "Car_Parking_Sqft": 140,
+            "Bedrooms": 3,
+            "Price_Lakh": 72
+          },
+          {
+            "Flat_ID": 25,
+            "Area_Sqft": 1280,
+            "Facing": "North",
+            "Floor": 5,
+            "Car_Parking_Sqft": 140,
+            "Bedrooms": 3,
+            "Price_Lakh": 72
+          }
+        ]
+      },
+      "_id": "y0yqyqv7oym",
+      "createdAt": "2026-08-23T07:13:32.656Z",
+      "updatedAt": "2026-08-23T07:13:32.656Z"
+    },
+    {
+      "inputFeatures": {
+        "Area_Sqft": 1000,
+        "Facing": "North",
+        "Floor": 3,
+        "Car_Parking_Sqft": 120,
+        "Bedrooms": 2
+      },
+      "predictedPrice": 5324119.752091782,
+      "modelName": "Multiple Linear Regression",
+      "predictionMetadata": {
+        "r2_score": 0.9978752157731158,
+        "mae": 63126.81092674811,
+        "rmse": 80267.86462573525,
+        "intercept": -13.74596916466544,
+        "coefficients": {
+          "Facing_East": -0.29037937946730624,
+          "Facing_North": -0.3915869556904169,
+          "Facing_South": 0.7380982131282257,
+          "Facing_West": -0.05613187797049646,
+          "Area_Sqft": 0.06081275473811487,
+          "Floor": 0.437498791459337,
+          "Car_Parking_Sqft": 0.024505178503978767,
+          "Bedrooms": 1.156440554151674
+        },
+        "similar_properties": [
+          {
+            "Flat_ID": 33,
+            "Area_Sqft": 1010,
+            "Facing": "North",
+            "Floor": 3,
+            "Car_Parking_Sqft": 120,
+            "Bedrooms": 2,
+            "Price_Lakh": 55
+          },
+          {
+            "Flat_ID": 53,
+            "Area_Sqft": 1040,
+            "Facing": "North",
+            "Floor": 3,
+            "Car_Parking_Sqft": 120,
+            "Bedrooms": 2,
+            "Price_Lakh": 57
+          },
+          {
+            "Flat_ID": 13,
+            "Area_Sqft": 1020,
+            "Facing": "North",
+            "Floor": 4,
+            "Car_Parking_Sqft": 120,
+            "Bedrooms": 2,
+            "Price_Lakh": 56
+          }
+        ]
+      },
+      "_id": "ekukhkgxfa",
+      "createdAt": "2026-08-23T07:13:58.564Z",
+      "updatedAt": "2026-08-23T07:13:58.564Z"
+    }
+  ]
+}
