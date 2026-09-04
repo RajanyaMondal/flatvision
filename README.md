@@ -1,189 +1,111 @@
-# 🏢 FlatVision AI — Intelligent Flat Price Predictor
+# FlatVision – AI‑Powered Property Price Prediction
 
-![FlatVision AI](https://via.placeholder.com/1200x600/000000/FFFFFF/?text=FlatVision+AI)
+A modern SaaS‑style web application that lets users predict property prices using a Linear Regression model. The stack includes:
 
-## Overview
+- **Frontend** – React 19 + Vite, TailwindCSS, Recharts, Clerk for authentication.
+- **Backend / Data** – Supabase (PostgreSQL + Auth + Row‑Level Security).
+- **ML Service** – FastAPI (Python) serving the regression model.
 
-FlatVision AI is an advanced, production-style full-stack real-estate platform that leverages Machine Learning to predict the estimated price of residential flats. Built with a modern technology stack, it features a premium UI, robust authentication, an interactive dashboard, and a dedicated AI prediction microservice.
-
-## Problem Statement
-
-Property valuation is often opaque and subjective, heavily relying on manual appraisals or outdated metrics. Homebuyers and sellers struggle to get accurate, data-driven estimates of flat prices based on crucial factors like exact floor level, specific amenities (gym, pool), and property age.
-
-## Solution
-
-FlatVision AI solves this by introducing a highly accurate Random Forest regression model trained on realistic property data. Users can input detailed property characteristics through a modern, secure web interface, which seamlessly communicates with the AI backend to deliver instant, explainable price predictions.
-
-## Features
-
-- **Modern Premium UI/UX**: Designed with React, Tailwind CSS, and Framer Motion for a sleek, responsive, and engaging experience.
-- **Machine Learning Prediction**: Powered by a Python/FastAPI microservice running a Scikit-Learn Random Forest Regressor (R² ~ 0.97).
-- **Secure Authentication**: Integrated with Supabase Auth for seamless user management.
-- **User Dashboard & History**: Users can view their prediction history, track market estimates, and manage their profile securely.
-- **Serverless Database**: Leveraging Supabase (PostgreSQL) with Row Level Security for scalable and robust real-time database capabilities.
-
-## Architecture
-
-```mermaid
-flowchart LR
-    User[User / Browser] <-->|HTTP/REST| Frontend(React + Vite)
-    Frontend <-->|Supabase Client| Supabase[(Supabase Postgres & Auth)]
-    Frontend <-->|HTTP/REST| MLService(Python + FastAPI)
-    MLService <-->|Joblib| Model(Random Forest Model)
-```
-
-## Technology Stack
-
-- **Frontend**: React 18, Vite, Tailwind CSS, React Router, Framer Motion, Recharts, Lucide React
-- **Backend & Database**: Supabase (PostgreSQL, Auth, RLS)
-- **Machine Learning**: Python 3, FastAPI, Pandas, Scikit-learn, Numpy
-- **Design System**: Custom CSS variables with Tailwind (Dark Mode support)
-
-## Project Structure
-
-```
-flatvision-ai/
-├── frontend/       # React UI (Vite)
-├── ml/             # Python/FastAPI ML Microservice
-└── supabase_schema.sql # Database schema and RLS policies
-```
+---
 
 ## Prerequisites
 
-- Node.js (v18+)
-- Python (v3.10+)
-- A [Supabase](https://supabase.com/) Account
-- Git
+| Tool | Version |
+|------|---------|
+| Node.js | >= 20 |
+| npm / yarn | latest |
+| Python | >= 3.10 |
+| pip | latest |
+| Supabase CLI | latest (optional – for local dev) |
+| uvicorn | latest |
+
+Make sure you have a **Supabase project** set up and the required environment variables added to the frontend `.env` file (see the `.env.example` in the `frontend` folder).
 
 ---
 
-## Installation & Setup
-
-### Step 1 — Clone the Repository
+## Quick Start
 
 ```bash
-git clone <repository-url>
-cd flatvision-ai
+# 1️⃣ Clone the repo (if you haven't already)
+git clone https://github.com/RajanyaMondal/flatvision.git
+cd flatvision
 ```
 
-### Step 2 — Install Frontend
+### Frontend (React)
 
 ```bash
+# Install dependencies
 cd frontend
-npm install
-```
+npm ci   # or `npm install`
 
-### Step 3 — Setup Python ML Environment
-
-```bash
-cd ../ml
-python -m venv venv
-```
-
-### Step 4 — Activate Environment
-
-**Windows:**
-```bash
-.\venv\Scripts\activate
-```
-**Linux/Mac:**
-```bash
-source venv/bin/activate
-```
-
-### Step 5 — Install ML Dependencies
-
-```bash
-python -m pip install --upgrade pip
-pip install fastapi uvicorn pandas scikit-learn numpy joblib
-```
-
----
-
-## Supabase Setup & Environment Variables
-
-1. Create a new project on [Supabase](https://supabase.com).
-2. Go to the **SQL Editor** in your Supabase dashboard and run the contents of `supabase_schema.sql` to create the `predictions` table and Row Level Security (RLS) policies.
-3. In your `frontend` directory, create a `.env` file based on `.env.example`:
-
-```env
-VITE_SUPABASE_URL=https://your-supabase-url.supabase.co
-VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
-VITE_ML_SERVICE_URL=http://localhost:8000
-```
-
----
-
-## Dataset Setup & ML Training
-
-We use a synthetic, highly-realistic dataset generator to ensure the model perfectly maps to the required real-estate features (Balcony, Gym, Pool, etc.).
-
-1. **Generate Data:**
-   *(Ensure your Python venv is activated inside the `ml/` directory)*
-   ```bash
-   python data_generator.py
-   ```
-   *This creates a 10,000-row `property_dataset.csv` in `ml/data/`.*
-
-2. **Train the Model:**
-   ```bash
-   python train.py
-   ```
-   *This trains the Random Forest model and saves it to `ml/models/property_model.joblib`. You will see evaluation metrics (MAE, RMSE, R²) printed in the console.*
-
----
-
-## Complete Running Process
-
-You will need two terminal windows to run the application components simultaneously.
-
-### Terminal 1 — Start ML Service
-
-```bash
-cd ml
-.\venv\Scripts\activate
-uvicorn app:app --reload --port 8000
-```
-*(Runs on http://localhost:8000)*
-
-### Terminal 2 — Start Frontend
-
-```bash
-cd frontend
+# Run the development server (hot‑reloading)
 npm run dev
 ```
-*(Runs on http://localhost:5173)*
 
-### Open Browser
-Navigate to **http://localhost:5173** to use the application!
+The UI will be available at **http://localhost:5173**.
 
 ---
 
-## Security
+### ML Service (FastAPI)
 
-- Authentication and user management handled completely by **Supabase Auth**.
-- Database access is strictly regulated using **Row Level Security (RLS)** in PostgreSQL. Users can only read and write their own prediction history.
-- API requests to the ML Service are simple and decoupled.
+```bash
+# Install Python deps (inside a virtualenv is recommended)
+cd ml
+python -m venv .venv
+source .venv/bin/activate   # on Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+# Start the FastAPI server
+uvicorn app:app --host 0.0.0.0 --port 8000
+```
+
+The prediction endpoint is exposed at **http://localhost:8000/predict**.
 
 ---
 
-## Testing & Troubleshooting
+### Supabase (Database & Auth)
 
-| Problem | Possible Cause | Solution |
-| :--- | :--- | :--- |
-| **Database connection failed** | Missing or incorrect Supabase keys | Verify `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in `frontend/.env`. |
-| **Prediction failed / 503 Error** | ML service offline | Ensure Uvicorn is running on port 8000 in Terminal 1. |
-| **Model not found / 500 Error** | Model not trained | Run `python train.py` inside the `ml/` directory. |
-| **Table 'predictions' does not exist** | Schema not initialized | Run the `supabase_schema.sql` code in the Supabase SQL editor. |
-| **Python package error** | Virtual environment issue | Recreate venv and reinstall via `pip install ...` |
+If you want to run Supabase locally (optional):
 
-## Future Improvements
+```bash
+# Install Supabase CLI if you haven't already
+npm install -g supabase
 
-- Incorporate SHAP values natively in the ML service for deep explainability.
-- Add OAuth2 (Google/Facebook) login via Supabase.
-- Implement PDF report exports for predictions.
-- Deploy infrastructure using Docker Compose.
+# Start Supabase locally (docker required)
+cd ..   # back to repo root
+supabase start
+```
+
+Otherwise, simply point the frontend to your remote Supabase project's URL & `anon` key via the `.env` file.
+
+---
+
+## Environment Variables (`frontend/.env`)
+
+```env
+VITE_SUPABASE_URL=YOUR_SUPABASE_URL
+VITE_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+VITE_CLERK_PUBLISHABLE_KEY=YOUR_CLERK_PUBLISHABLE_KEY
+VITE_ML_SERVICE_URL=http://localhost:8000   # change if hosted elsewhere
+```
+
+---
+
+## Building for Production
+
+```bash
+# Frontend
+cd frontend
+npm run build   # creates a static bundle in `dist/`
+
+# ML Service (Docker example)
+cd ../ml
+docker build -t flatvision-ml .
+docker run -p 8000:8000 flatvision-ml
+```
+
+---
 
 ## License
 
-MIT License. Copyright (c) 2026 FlatVision AI.
+MIT © FlatVision contributors
