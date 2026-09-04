@@ -29,28 +29,30 @@ graph TD
 
 ---
 
-## Phase 2: Deploy the ML Service (FastAPI) on Railway
+## Phase 2: Deploy the ML Service (FastAPI) on Render
 
-Deploy the machine learning microservice so the frontend has a URL to connect to. Railway is recommended as it has excellent support for Python ML packages.
+Deploy the machine learning microservice so the frontend has a URL to connect to. The repository includes a `render.yaml` Blueprint which makes this process fully automated on Render.
 
-1. **Sign In**: Log into your [Railway Dashboard](https://railway.app).
-2. **New Project**: Click **New Project** and select **Deploy from GitHub repo**.
-3. **Connect Repository**: Select your GitHub repository containing the project.
+1. **Sign In**: Log into your [Render Dashboard](https://dashboard.render.com/).
+2. **New Project**: Click **New** and select **Web Service**.
+3. **Connect Repository**: Connect your GitHub account and select your repository containing the project.
 4. **Configuration Settings**:
-   - Once added, click on the newly created service card in your Railway project canvas.
-   - Go to **Settings** -> **Build**.
-   - **Root Directory**: Set this to `/ml` *(Crucial: This tells Railway to compile from the `ml/` subfolder)*.
-   - **Builder**: It will automatically detect Python and install `requirements.txt`.
-   - Go to **Settings** -> **Deploy**.
-   - **Custom Start Command**: `python -m uvicorn app:app --host 0.0.0.0 --port $PORT`
-5. **Generate Domain**: Go to **Settings** -> **Environment** and click **Generate Domain** (or set up a custom domain). 
-6. **Retrieve URL**: Copy the generated service URL (e.g. `https://flatvision-production.up.railway.app`).
+   - **Name**: `flatvision-ml` (or whatever you prefer)
+   - **Language**: `Python 3`
+   - **Root Directory**: `ml` *(Crucial: This tells Render to compile from the `ml/` subfolder)*
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `uvicorn app:app --host 0.0.0.0 --port $PORT`
+   - **Instance Type**: `Free`
+5. **Environment Variables** (Optional but recommended):
+   - Add a new variable with Key: `PYTHON_VERSION` and Value: `3.10.0`
+6. **Deploy**: Click **Create Web Service**.
+7. **Retrieve URL**: Once the build completes and the service is live, copy the generated service URL from the top left of the dashboard (e.g. `https://flatvision-ml.onrender.com`).
 
 ---
 
 ## Phase 3: Deploy the Frontend (React + Vite) on Vercel
 
-Finally, deploy your React frontend to Vercel and hook it up to Supabase and the Railway ML Service.
+Finally, deploy your React frontend to Vercel and hook it up to Supabase and the Render ML Service.
 
 1. **Sign In**: Log into your [Vercel Dashboard](https://vercel.com).
 2. **Import Project**: Click **Add New** -> **Project**, and select your GitHub repository.
@@ -64,15 +66,15 @@ Finally, deploy your React frontend to Vercel and hook it up to Supabase and the
    | :--- | :--- | :--- |
    | `VITE_SUPABASE_URL` | `https://your-project-id.supabase.co` | The Supabase Project URL from **Phase 1** |
    | `VITE_SUPABASE_ANON_KEY` | `eyJhb...` | The Supabase anon public key from **Phase 1** |
-   | `VITE_ML_SERVICE_URL` | `https://flatvision-production.up.railway.app` | The Railway service URL you copied from **Phase 2** |
+   | `VITE_ML_SERVICE_URL` | `https://flatvision-ml.onrender.com` | The Render service URL you copied from **Phase 2** |
 
 5. **Deploy**: Click **Deploy**.
-6. **Final Step**: Once deployed, the frontend should now securely authenticate users with Supabase, store predictions in the PostgreSQL database, and get real-time price valuations from the FastAPI Python service!
+6. **Final Step**: Once deployed, the frontend should now securely authenticate users with Supabase, store predictions in the PostgreSQL database, and get real-time price valuations from the FastAPI Python service hosted on Render!
 
 ---
 
 ## Troubleshooting & Verification
 
-- **Check Logs**: If predictions fail, view Railway log outputs in the `flatvision-ml` service dashboard.
-- **Spin-up Delay**: Free services on Railway may sleep when out of credits. Ensure your account is active.
+- **Check Logs**: If predictions fail, view Render log outputs in the `flatvision-ml` service dashboard.
+- **Spin-up Delay**: Free instances on Render spin down after 15 minutes of inactivity. It may take up to 50 seconds to spin back up on the first request.
 - **Auth Errors**: Verify that your `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` environment variables are properly set in Vercel.
