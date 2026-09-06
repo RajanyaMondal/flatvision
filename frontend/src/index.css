@@ -5,6 +5,7 @@
 @layer base {
   html {
     font-family: 'Inter', system-ui, sans-serif;
+    font-size: 112.5%;
   }
   body {
     @apply bg-slate-50 text-slate-900;

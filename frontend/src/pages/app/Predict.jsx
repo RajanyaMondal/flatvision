@@ -75,7 +75,7 @@ const Predict = () => {
               </div>
             )}
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">Bedrooms</label>
                 <select 
@@ -102,7 +102,7 @@ const Predict = () => {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Input 
                 label="Floor Level" 
                 type="number" 
@@ -144,7 +144,7 @@ const Predict = () => {
         <div>
           {result ? (
             <div className="space-y-6 animate-in slide-in-from-bottom-4 fade-in duration-500">
-              <Card className="bg-teal-600 border-teal-500 shadow-xl shadow-teal-500/20 relative overflow-hidden">
+              <div className="bg-teal-600 border border-teal-500 shadow-xl shadow-teal-500/20 rounded-xl p-6 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-3xl"></div>
                 <div className="relative z-10">
                   <div className="text-teal-50 text-sm font-semibold mb-1 uppercase tracking-wider">Estimated Valuation</div>
@@ -155,7 +155,7 @@ const Predict = () => {
                     Model Confidence R²: {result.prediction_metadata?.r2_score?.toFixed(4) || 'N/A'}
                   </div>
                 </div>
-              </Card>
+              </div>
 
               <Card>
                 <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wider mb-4">Input Parameters</h3>

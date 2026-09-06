@@ -13,8 +13,8 @@ const HomePage = () => {
       {/* --- HERO SECTION --- */}
       <section className="relative pt-28 pb-20 lg:pt-36 lg:pb-32 overflow-hidden px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
          {/* Background Glows */}
-         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100 rounded-full blur-[100px] opacity-70 -z-10 translate-x-1/3 -translate-y-1/3"></div>
-         <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-indigo-100 rounded-full blur-[80px] opacity-50 -z-10 -translate-x-1/2 -translate-y-1/2"></div>
+         <div className="absolute top-0 right-0 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-blue-100 rounded-full blur-[60px] sm:blur-[100px] opacity-70 -z-10 translate-x-1/3 -translate-y-1/3"></div>
+         <div className="absolute top-1/2 left-0 w-[200px] sm:w-[400px] h-[200px] sm:h-[400px] bg-indigo-100 rounded-full blur-[40px] sm:blur-[80px] opacity-50 -z-10 -translate-x-1/2 -translate-y-1/2"></div>
          
          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
             {/* Left Content */}
@@ -82,35 +82,35 @@ const HomePage = () => {
                   </div>
                   
                   {/* Floating Card 1: Price */}
-                  <div className="absolute top-10 -left-20 bg-white rounded-2xl p-4 shadow-xl border border-slate-100 w-48 animate-[float_4s_ease-in-out_infinite]">
+                  <div className="absolute top-4 sm:top-10 -left-4 sm:-left-20 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-slate-100 w-36 sm:w-48 animate-[float_4s_ease-in-out_infinite] scale-90 sm:scale-100 origin-top-left">
                      <div className="flex items-center gap-2 mb-2">
-                        <div className="w-6 h-6 rounded-md bg-blue-100 flex items-center justify-center"><Home className="w-3 h-3 text-blue-600" /></div>
-                        <span className="text-xs font-semibold text-slate-500">Predicted Price</span>
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md bg-blue-100 flex items-center justify-center"><Home className="w-3 h-3 text-blue-600" /></div>
+                        <span className="text-[10px] sm:text-xs font-semibold text-slate-500">Predicted Price</span>
                      </div>
-                     <div className="text-2xl font-black text-slate-900">₹78.5 L</div>
-                     <div className="flex items-center gap-1 mt-1 text-emerald-500 text-xs font-bold">
-                        <TrendingUp className="w-3 h-3" /> 4.2% <span className="ml-2 w-10 h-1 bg-gradient-to-r from-emerald-100 to-emerald-400 rounded-full"></span>
+                     <div className="text-xl sm:text-2xl font-black text-slate-900">₹78.5 L</div>
+                     <div className="flex items-center gap-1 mt-1 text-emerald-500 text-[10px] sm:text-xs font-bold">
+                        <TrendingUp className="w-3 h-3" /> 4.2% <span className="ml-1 sm:ml-2 w-6 sm:w-10 h-1 bg-gradient-to-r from-emerald-100 to-emerald-400 rounded-full"></span>
                      </div>
                   </div>
                   
                   {/* Floating Card 2: EMI */}
-                  <div className="absolute top-20 -right-16 bg-white rounded-2xl p-4 shadow-xl border border-slate-100 w-44 animate-[float_5s_ease-in-out_infinite_reverse]">
+                  <div className="absolute top-20 sm:top-20 -right-4 sm:-right-16 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-slate-100 w-32 sm:w-44 animate-[float_5s_ease-in-out_infinite_reverse] scale-90 sm:scale-100 origin-top-right z-10">
                      <div className="flex items-center gap-2 mb-2">
-                        <div className="w-6 h-6 rounded-md bg-indigo-100 flex items-center justify-center"><Calculator className="w-3 h-3 text-indigo-600" /></div>
-                        <span className="text-xs font-semibold text-slate-500">EMI (20 yrs)</span>
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md bg-indigo-100 flex items-center justify-center"><Calculator className="w-3 h-3 text-indigo-600" /></div>
+                        <span className="text-[10px] sm:text-xs font-semibold text-slate-500">EMI (20 yrs)</span>
                      </div>
-                     <div className="text-xl font-black text-slate-900">₹35,823</div>
-                     <div className="text-[10px] text-slate-400 font-medium">/month</div>
+                     <div className="text-lg sm:text-xl font-black text-slate-900">₹35,823</div>
+                     <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium">/month</div>
                   </div>
                   
                   {/* Floating Card 3: ROI */}
-                  <div className="absolute bottom-32 -right-24 bg-white rounded-2xl p-4 shadow-xl border border-slate-100 w-48 animate-[float_4.5s_ease-in-out_infinite]">
+                  <div className="absolute bottom-10 sm:bottom-32 -right-6 sm:-right-24 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-slate-100 w-36 sm:w-48 animate-[float_4.5s_ease-in-out_infinite] scale-90 sm:scale-100 origin-bottom-right">
                      <div className="flex items-center gap-2 mb-2">
-                        <div className="w-6 h-6 rounded-md bg-emerald-100 flex items-center justify-center"><Lock className="w-3 h-3 text-emerald-600" /></div>
-                        <span className="text-xs font-semibold text-slate-500">Investment ROI</span>
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md bg-emerald-100 flex items-center justify-center"><Lock className="w-3 h-3 text-emerald-600" /></div>
+                        <span className="text-[10px] sm:text-xs font-semibold text-slate-500">Investment ROI</span>
                      </div>
-                     <div className="text-xl font-black text-slate-900">6.1% <span className="text-xs text-slate-400 font-medium">CAGR</span></div>
-                     <div className="mt-2 w-full h-6 border-b border-l border-slate-100 relative">
+                     <div className="text-lg sm:text-xl font-black text-slate-900">6.1% <span className="text-[9px] sm:text-xs text-slate-400 font-medium">CAGR</span></div>
+                     <div className="mt-2 w-full h-4 sm:h-6 border-b border-l border-slate-100 relative">
                         <svg className="absolute w-full h-full bottom-0" preserveAspectRatio="none" viewBox="0 0 100 20"><polyline points="0,20 20,15 40,18 60,10 80,12 100,5" fill="none" stroke="#10b981" strokeWidth="2"/></svg>
                      </div>
                   </div>
@@ -244,10 +244,10 @@ const HomePage = () => {
                   {/* Laptop Body */}
                   <div className="relative w-full max-w-[600px] mx-auto z-10 transform rotate-y-[-5deg] rotate-x-[2deg]">
                      {/* Screen */}
-                     <div className="bg-slate-900 rounded-t-3xl p-3 pb-4 shadow-2xl">
-                        <div className="bg-white rounded-xl h-[340px] overflow-hidden flex relative">
+                     <div className="bg-slate-900 rounded-t-3xl p-2 sm:p-3 pb-3 sm:pb-4 shadow-2xl">
+                        <div className="bg-white rounded-xl h-[250px] sm:h-[340px] overflow-hidden flex relative">
                            {/* Fake Dashboard Layout inside screen */}
-                           <div className="w-40 border-r border-slate-100 p-4 pt-6 hidden sm:block">
+                           <div className="w-32 sm:w-40 border-r border-slate-100 p-3 sm:p-4 pt-4 sm:pt-6 hidden sm:block">
                               <div className="flex items-center gap-2 mb-8">
                                  <div className="w-5 h-5 bg-indigo-600 rounded-md"></div>
                                  <span className="text-xs font-bold">FlatVision</span>
