@@ -8,7 +8,8 @@
     font-size: 112.5%;
   }
   body {
-    @apply bg-slate-50 text-slate-900;
+    background: #F2EFE7;
+    @apply text-slate-900;
   }
 }
 
@@ -26,3 +27,85 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-slate-400;
 }
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+  
+  /* Claymorphism Classes - Sage & Sand Light Theme */
+  .clay-card {
+    background: #F4F8F4;
+    color: #0A2540;
+    border-radius: 32px;
+    box-shadow: 
+      10px 10px 20px rgba(180, 200, 195, 0.4),
+      -10px -10px 20px rgba(255, 255, 255, 0.8);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .clay-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      14px 14px 28px rgba(180, 200, 195, 0.5),
+      -14px -14px 28px rgba(255, 255, 255, 1);
+  }
+
+  .clay-btn {
+    background: rgba(255, 255, 255, 0.8);
+    color: #0A2540;
+    border-radius: 16px;
+    box-shadow: 
+      6px 6px 14px rgba(200, 223, 219, 0.5),
+      -6px -6px 14px rgba(255, 255, 255, 0.9),
+      inset 2px 2px 5px rgba(255, 255, 255, 0.6),
+      inset -2px -2px 5px rgba(200, 223, 219, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .clay-btn:active {
+    transform: scale(0.96);
+    box-shadow: 
+      2px 2px 5px rgba(200, 223, 219, 0.3),
+      -2px -2px 5px rgba(255, 255, 255, 0.5),
+      inset 4px 4px 8px rgba(200, 223, 219, 0.4),
+      inset -4px -4px 8px rgba(255, 255, 255, 0.6);
+  }
+
+  /* Accent Color: #C8DFDB (Pastel Sage/Mint) */
+  .clay-accent {
+    background: #C8DFDB;
+    color: #0A2540;
+    border-radius: 16px;
+    box-shadow: 
+      6px 6px 14px rgba(200, 223, 219, 0.6),
+      -6px -6px 14px rgba(255, 255, 255, 0.9),
+      inset 2px 2px 5px rgba(255, 255, 255, 0.5),
+      inset -2px -2px 5px rgba(170, 193, 189, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .clay-accent:hover {
+    background: #D9EBE8;
+    box-shadow: 
+      8px 8px 18px rgba(200, 223, 219, 0.7),
+      -8px -8px 18px rgba(255, 255, 255, 1),
+      inset 2px 2px 5px rgba(255, 255, 255, 0.6),
+      inset -2px -2px 5px rgba(170, 193, 189, 0.2);
+  }
+
+  .clay-accent:active {
+    transform: scale(0.96);
+    box-shadow: 
+      2px 2px 5px rgba(200, 223, 219, 0.4),
+      -2px -2px 5px rgba(255, 255, 255, 0.6),
+      inset 4px 4px 8px rgba(170, 193, 189, 0.4),
+      inset -4px -4px 8px rgba(255, 255, 255, 0.4);
+  }
+}
+

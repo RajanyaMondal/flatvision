@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Card = ({ children, className = '', padding = 'p-6' }) => {
   return (
-    <div className={`bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm ${className}`}>
+    <div className={`clay-card ${className}`}>
       <div className={padding}>
         {children}
       </div>

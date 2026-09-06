@@ -16,7 +16,7 @@ const Profile = () => {
             profileSectionContent: "text-slate-600",
             formFieldLabel: "text-slate-700",
             formFieldInput: "bg-white border-slate-300 text-slate-900 focus:border-teal-500 focus:ring-teal-500 shadow-sm",
-            formButtonPrimary: "bg-teal-600 hover:bg-teal-500 text-white shadow-sm",
+            formButtonPrimary: "bg-teal-600 hover:bg-teal-500 text-[#0A2540] shadow-sm",
             dividerLine: "bg-slate-200",
             dividerText: "text-slate-400",
             pageScrollBox: "bg-white",

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
-import { Moon, Bell, ArrowRight, Menu, X } from 'lucide-react';
+import { Moon, Sun, Bell, ArrowRight, Menu, X } from 'lucide-react';
 
 const Navbar = ({ onMenuClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,13 +17,13 @@ const Navbar = ({ onMenuClick }) => {
   ];
 
   return (
-    <header className="h-[72px] border-b border-white/40 bg-white/70 backdrop-blur-xl sticky top-0 z-50 shadow-[0_4px_30px_rgba(0,0,0,0.03)] transition-all duration-300">
+    <header className="h-[72px] border-b border-white/40 dark:border-slate-800/60 bg-white/70 dark:bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50 shadow-[0_4px_30px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.2)] transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
         
         <div className="flex items-center gap-4">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <img src="/flatvision-logo.png" alt="FlatVision Logo" className="h-16 md:h-20 -ml-2 mix-blend-multiply drop-shadow-sm hover:scale-105 transition-transform" />
+            <img src="/flatvision-logo.png" alt="FlatVision Logo" className="h-16 md:h-20 -ml-2 mix-blend-multiply dark:mix-blend-normal drop-shadow-sm hover:scale-105 transition-transform" />
           </Link>
         </div>
         
@@ -45,8 +45,8 @@ const Navbar = ({ onMenuClick }) => {
                 to={link.path} 
                 className={`relative px-4 py-2 text-sm font-semibold rounded-full transition-all duration-300 group
                   ${isActive 
-                    ? 'text-white bg-slate-900 shadow-md shadow-slate-900/20' 
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
+                    ? 'text-white bg-slate-900 dark:bg-white dark:text-slate-900 shadow-md shadow-slate-900/20 dark:shadow-white/20' 
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
                   }`}
               >
                 {link.name}
@@ -57,9 +57,6 @@ const Navbar = ({ onMenuClick }) => {
         
         {/* Right Actions */}
         <div className="flex items-center gap-2 sm:gap-4">
-           <button className="hidden sm:block text-slate-500 hover:text-slate-800 transition-colors">
-              <Moon className="w-5 h-5" />
-           </button>
            <div className="relative hidden sm:block">
               <button className="text-slate-500 hover:text-slate-800 transition-colors">
                  <Bell className="w-5 h-5" />

@@ -5,11 +5,11 @@ import BackButton from '../ui/BackButton';
 
 const PublicLayout = () => {
   return (
-    <div className="min-h-screen bg-neutral-900 text-white font-sans flex flex-col">
+    <div className="min-h-screen text-[#163050] font-sans flex flex-col" style={{ background: '#F2EFE7' }}>
       <Navbar />
 
-      <main className="flex-1 flex flex-col">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <main className="flex-1 flex flex-col w-full">
+        <div className="w-full px-4 sm:px-6 lg:px-8 pt-6">
           <BackButton />
         </div>
         <Outlet />

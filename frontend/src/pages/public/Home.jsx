@@ -42,7 +42,7 @@ const HomePage = () => {
                
                {/* Buttons */}
                <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start mb-12">
-                  <Link to="/app/predict" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold shadow-lg shadow-indigo-500/30 transition-all flex items-center justify-center gap-2">
+                  <Link to="/app/predict" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-[#0A2540] font-bold shadow-lg shadow-indigo-500/30 transition-all flex items-center justify-center gap-2">
                      Start Prediction <ArrowRight className="w-5 h-5" />
                   </Link>
                   <button className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white border-2 border-slate-200 hover:border-slate-300 text-slate-700 font-bold transition-all flex items-center justify-center gap-2 shadow-sm">
@@ -82,7 +82,7 @@ const HomePage = () => {
                   </div>
                   
                   {/* Floating Card 1: Price */}
-                  <div className="absolute top-4 sm:top-10 -left-4 sm:-left-20 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-slate-100 w-36 sm:w-48 animate-[float_4s_ease-in-out_infinite] scale-90 sm:scale-100 origin-top-left">
+                  <div className="hidden sm:block absolute top-4 sm:top-10 -left-4 sm:-left-20 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-slate-100 w-36 sm:w-48 animate-[float_4s_ease-in-out_infinite] scale-90 sm:scale-100 origin-top-left">
                      <div className="flex items-center gap-2 mb-2">
                         <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md bg-blue-100 flex items-center justify-center"><Home className="w-3 h-3 text-blue-600" /></div>
                         <span className="text-[10px] sm:text-xs font-semibold text-slate-500">Predicted Price</span>
@@ -94,7 +94,7 @@ const HomePage = () => {
                   </div>
                   
                   {/* Floating Card 2: EMI */}
-                  <div className="absolute top-20 sm:top-20 -right-4 sm:-right-16 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-slate-100 w-32 sm:w-44 animate-[float_5s_ease-in-out_infinite_reverse] scale-90 sm:scale-100 origin-top-right z-10">
+                  <div className="hidden sm:block absolute top-20 sm:top-20 -right-4 sm:-right-16 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-slate-100 w-32 sm:w-44 animate-[float_5s_ease-in-out_infinite_reverse] scale-90 sm:scale-100 origin-top-right z-10">
                      <div className="flex items-center gap-2 mb-2">
                         <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md bg-indigo-100 flex items-center justify-center"><Calculator className="w-3 h-3 text-indigo-600" /></div>
                         <span className="text-[10px] sm:text-xs font-semibold text-slate-500">EMI (20 yrs)</span>
@@ -104,7 +104,7 @@ const HomePage = () => {
                   </div>
                   
                   {/* Floating Card 3: ROI */}
-                  <div className="absolute bottom-10 sm:bottom-32 -right-6 sm:-right-24 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-slate-100 w-36 sm:w-48 animate-[float_4.5s_ease-in-out_infinite] scale-90 sm:scale-100 origin-bottom-right">
+                  <div className="hidden sm:block absolute bottom-10 sm:bottom-32 -right-6 sm:-right-24 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-slate-100 w-36 sm:w-48 animate-[float_4.5s_ease-in-out_infinite] scale-90 sm:scale-100 origin-bottom-right">
                      <div className="flex items-center gap-2 mb-2">
                         <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md bg-emerald-100 flex items-center justify-center"><Lock className="w-3 h-3 text-emerald-600" /></div>
                         <span className="text-[10px] sm:text-xs font-semibold text-slate-500">Investment ROI</span>
@@ -169,7 +169,7 @@ const HomePage = () => {
                
                {/* Step 1 */}
                <div className="bg-white rounded-3xl shadow-sm border border-slate-100 p-8 w-full max-w-sm relative group hover:shadow-md transition-shadow">
-                  <div className="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-blue-500 text-white font-bold flex items-center justify-center shadow-lg shadow-blue-500/30">1</div>
+                  <div className="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-blue-500 text-[#0A2540] font-bold flex items-center justify-center shadow-lg shadow-blue-500/30">1</div>
                   <div className="w-16 h-16 mx-auto rounded-2xl bg-blue-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                      <Home className="w-8 h-8 text-blue-600" />
                   </div>
@@ -180,7 +180,7 @@ const HomePage = () => {
 
                {/* Step 2 */}
                <div className="bg-white rounded-3xl shadow-sm border border-slate-100 p-8 w-full max-w-sm relative group hover:shadow-md transition-shadow">
-                  <div className="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-indigo-500 text-white font-bold flex items-center justify-center shadow-lg shadow-indigo-500/30">2</div>
+                  <div className="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-indigo-500 text-[#0A2540] font-bold flex items-center justify-center shadow-lg shadow-indigo-500/30">2</div>
                   <div className="w-16 h-16 mx-auto rounded-2xl bg-indigo-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                      <BrainCircuit className="w-8 h-8 text-indigo-600" />
                   </div>
@@ -191,7 +191,7 @@ const HomePage = () => {
 
                {/* Step 3 */}
                <div className="bg-white rounded-3xl shadow-sm border border-slate-100 p-8 w-full max-w-sm relative group hover:shadow-md transition-shadow">
-                  <div className="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-emerald-500 text-white font-bold flex items-center justify-center shadow-lg shadow-emerald-500/30">3</div>
+                  <div className="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-emerald-500 text-[#0A2540] font-bold flex items-center justify-center shadow-lg shadow-emerald-500/30">3</div>
                   <div className="w-16 h-16 mx-auto rounded-2xl bg-emerald-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                      <BarChart3 className="w-8 h-8 text-emerald-600" />
                   </div>
@@ -234,7 +234,7 @@ const HomePage = () => {
                {/* Right: Laptop Mockup */}
                <div className="flex-1 relative w-full perspective-[1000px]">
                   {/* Potted Plant */}
-                  <div className="absolute -right-8 bottom-0 w-24 h-32 z-20">
+                  <div className="absolute right-0 sm:-right-8 bottom-0 w-24 h-32 z-20">
                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-12 bg-white rounded-b-xl border border-slate-200"></div>
                      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-4 h-16 bg-green-700 rounded-full origin-bottom rotate-[-20deg]"></div>
                      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-4 h-12 bg-green-600 rounded-full origin-bottom rotate-[20deg]"></div>
@@ -297,7 +297,7 @@ const HomePage = () => {
                                     <div className="w-full h-10 bg-slate-100 rounded overflow-hidden">
                                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="prop" className="w-full h-full object-cover" />
                                     </div>
-                                    <button className="w-full py-1 bg-indigo-600 text-white rounded text-[7px] font-bold">Download PDF</button>
+                                    <button className="w-full py-1 bg-indigo-600 text-[#0A2540] rounded text-[7px] font-bold">Download PDF</button>
                                  </div>
                               </div>
                            </div>
@@ -320,14 +320,14 @@ const HomePage = () => {
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             {/* CTA Banner */}
-            <div className="w-full rounded-3xl bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 p-8 lg:p-12 text-white flex flex-col md:flex-row items-center justify-between gap-8 mb-16 shadow-xl shadow-indigo-500/20 relative overflow-hidden">
+            <div className="w-full rounded-3xl bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 p-8 lg:p-12 text-[#0A2540] flex flex-col md:flex-row items-center justify-between gap-8 mb-16 shadow-xl shadow-indigo-500/20 relative overflow-hidden">
                {/* Decorative background shapes */}
                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
                <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl"></div>
                
                <div className="flex items-center gap-6 relative z-10 text-center md:text-left flex-col md:flex-row">
                   <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center shadow-inner border border-white/30">
-                     <Building2 className="w-8 h-8 text-white" />
+                     <Building2 className="w-8 h-8 text-[#0A2540]" />
                   </div>
                   <div>
                      <h3 className="text-2xl font-bold mb-2">Ready to discover your property's true value?</h3>
