@@ -8,6 +8,14 @@
   html {
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 112.5%;
+    transition: filter 0.3s ease, background-color 0.3s ease;
+  }
+  html.dark {
+    filter: invert(1) hue-rotate(180deg);
+    background-color: #0D1018; /* Inverted equivalent of #F2EFE7 to prevent white borders */
+  }
+  html.dark img, html.dark video, html.dark iframe, html.dark .no-invert {
+    filter: invert(1) hue-rotate(180deg);
   }
   body {
     background: #F2EFE7;

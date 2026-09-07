@@ -147,7 +147,7 @@ const Dashboard = () => {
         {/* 1. Header Row */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center clay-card p-8 relative overflow-hidden mb-6 transition-all duration-300">
           <div className="relative z-10">
-            <h1 className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#0A2540] to-[#163050] flex items-center gap-3 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#0A2540] to-[#163050] flex flex-wrap items-center gap-2 sm:gap-3 tracking-tight">
               Welcome back, {user?.firstName || 'Rai'}! <span className="text-3xl animate-wave origin-bottom-right inline-block">👋</span>
             </h1>
             <p className="text-[#476685] mt-2 font-bold text-base tracking-wide">Here's your intelligent real estate market overview today.</p>
@@ -403,14 +403,14 @@ const Dashboard = () => {
                  <svg className="w-8 h-8 text-[#0A2540]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
               </div>
               <div>
-                 <h3 className="font-black text-2xl tracking-tight text-[#0A2540]">AI-Powered Insights</h3>
-                 <p className="text-pink-50 font-semibold text-sm mt-1 tracking-wide">Our model continuously learns from new data to provide you with more accurate predictions.</p>
+                 <h3 className="font-black text-xl sm:text-2xl tracking-tight text-[#0A2540]">AI-Powered Insights</h3>
+                 <p className="text-[#0A2540]/70 font-semibold text-sm mt-1 tracking-wide">Our model continuously learns from new data to provide you with more accurate predictions.</p>
               </div>
            </div>
            <div className="relative z-10 flex items-center gap-6">
-              <button className="bg-white hover:bg-[#F0FCFF] text-[#00D2FF] px-8 py-3.5 rounded-2xl text-sm font-black tracking-wide shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2">
+              <Link to="/how-it-works" className="bg-white hover:bg-[#F0FCFF] text-[#00D2FF] px-8 py-3.5 rounded-2xl text-sm font-black tracking-wide shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2">
                  Explore Algorithms <ArrowRight className="w-4 h-4" />
-              </button>
+              </Link>
            </div>
            {/* Subtle background patterns */}
            <div className="absolute inset-0 opacity-[0.05] mix-blend-overlay pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>

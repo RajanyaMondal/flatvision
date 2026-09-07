@@ -26,11 +26,9 @@ import Help from '../pages/app/Help';
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Standalone Public Routes */}
-      <Route path="/how-it-works" element={<ModelWorks />} />
-
       {/* Public Routes with Layout */}
       <Route element={<PublicLayout />}>
+        <Route path="/how-it-works" element={<ModelWorks />} />
         <Route path="/" element={<Home />} />
         <Route path="/features" element={<Features />} />
         <Route path="/about" element={<About />} />

@@ -116,22 +116,7 @@ export default function ModelWorks() {
       <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[#92EEFF]/15 blur-[150px] pointer-events-none" />
       <div className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[#FFC6F3]/15 blur-[150px] pointer-events-none" />
 
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 border-b border-[#7AAACE]/30 bg-[#F0FCFF]/70 backdrop-blur-xl z-50">
-        <div className="container mx-auto px-6 h-20 flex justify-between items-center">
-          <Link to="/" className="flex items-center group">
-            <img src="/new-logo.png" alt="FlatVision Logo" className="h-20 md:h-[5.5rem] -ml-2 mix-blend-multiply drop-shadow-sm group-hover:scale-105 transition-transform" />
-          </Link>
-          <MotionLink 
-            to="/" 
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-2 text-sm font-bold text-[#476685] hover:text-[#00D2FF] cursor-pointer"
-          >
-            <ArrowLeft className="w-4 h-4" /> Back to Home
-          </MotionLink>
-        </div>
-      </nav>
+      {/* Navigation handled by PublicLayout */}
 
       <main className="container mx-auto px-6 pt-36 pb-32 max-w-6xl relative z-10">
         {/* Title */}
@@ -152,9 +137,9 @@ export default function ModelWorks() {
           <h2 className="text-3xl font-black text-[#0A2540] mb-8 flex items-center gap-3 tracking-tight">
             <Cpu className="text-[#58E0FF] w-7 h-7 animate-spin" style={{ animationDuration: '8s' }} /> End-to-End System Architecture
           </h2>
-          <div className="grid md:grid-cols-5 gap-6 items-center bg-white/40 border border-[#7AAACE]/30 rounded-3xl p-10 backdrop-blur-md shadow-md">
+          <div className="grid md:grid-cols-5 gap-6 items-center clay-card p-10 backdrop-blur-md">
             
-            <div className="bg-white border border-[#7AAACE]/30 rounded-3xl p-8 text-center shadow-md hover:scale-102 transition-transform">
+            <div className="clay-card p-8 text-center hover:scale-[1.02] transition-transform">
               <span className="text-xs uppercase font-bold text-[#00D2FF] tracking-wider">Step 1</span>
               <div className="text-lg font-black text-[#0A2540] mt-3 mb-2">React Client</div>
               <p className="text-sm font-semibold text-[#476685] leading-relaxed">User inputs flat parameters on the dashboard UI (no extra mock parameters).</p>
@@ -162,7 +147,7 @@ export default function ModelWorks() {
             
             <div className="flex justify-center text-[#58E0FF]"><ArrowRight className="rotate-90 md:rotate-0 w-8 h-8" /></div>
             
-            <div className="bg-white border border-[#7AAACE]/30 rounded-3xl p-8 text-center shadow-md hover:scale-102 transition-transform">
+            <div className="clay-card p-8 text-center hover:scale-[1.02] transition-transform">
               <span className="text-xs uppercase font-bold text-[#00D2FF] tracking-wider">Step 2</span>
               <div className="text-lg font-black text-[#0A2540] mt-3 mb-2">Express API</div>
               <p className="text-sm font-semibold text-[#476685] leading-relaxed">Validates the 5 active features and writes logs to database.</p>
@@ -170,7 +155,7 @@ export default function ModelWorks() {
             
             <div className="flex justify-center text-[#58E0FF]"><ArrowRight className="rotate-90 md:rotate-0 w-8 h-8" /></div>
             
-            <div className="bg-white border border-[#7AAACE]/30 rounded-3xl p-8 text-center shadow-md hover:scale-102 transition-transform">
+            <div className="clay-card p-8 text-center hover:scale-[1.02] transition-transform">
               <span className="text-xs uppercase font-bold text-[#00D2FF] tracking-wider">Step 3</span>
               <div className="text-lg font-black text-[#0A2540] mt-3 mb-2">Python FastAPI</div>
               <p className="text-sm font-semibold text-[#476685] leading-relaxed">Applies Scikit-Learn linear regression and computes similar properties.</p>
@@ -181,7 +166,7 @@ export default function ModelWorks() {
 
         {/* 2. Algorithm & Mathematics */}
         <section className="grid md:grid-cols-2 gap-8 mb-20">
-          <div className="bg-white/40 border border-[#7AAACE]/30 rounded-3xl p-10 flex flex-col justify-between shadow-md">
+          <div className="clay-card p-10 flex flex-col justify-between">
             <div>
               <h2 className="text-3xl font-black text-[#0A2540] mb-6 flex items-center gap-3">
                 <Activity className="text-[#58E0FF] w-7 h-7" /> The Mathematics of Regression
@@ -229,7 +214,7 @@ export default function ModelWorks() {
             </div>
           </div>
 
-          <div className="bg-white border border-[#7AAACE]/30 rounded-3xl p-10 flex flex-col justify-center items-center text-center shadow-md">
+          <div className="clay-card p-10 flex flex-col justify-center items-center text-center">
             <span className="text-xs text-[#476685] uppercase tracking-widest font-black mb-6">Linear Regression Mathematical Equation</span>
             
             {loading ? (
@@ -273,7 +258,7 @@ export default function ModelWorks() {
             <LineChart className="text-[#58E0FF] w-7 h-7" /> Error Metrics & Formulas
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white/40 border border-[#7AAACE]/30 rounded-3xl p-6 shadow-md">
+            <div className="clay-card p-6">
               <h3 className="font-extrabold text-[#0A2540] text-lg mb-2">MSE (Mean Squared Error)</h3>
               <p className="text-sm text-[#476685] mb-4 font-semibold">Average of the squared differences between predicted and actual values. Heavily penalizes large errors.</p>
               <div className="bg-[#F0FCFF] p-3 rounded-xl border border-[#7AAACE]/30 font-mono text-xs text-center text-[#0A2540] font-bold">
@@ -281,7 +266,7 @@ export default function ModelWorks() {
               </div>
             </div>
             
-            <div className="bg-white/40 border border-[#7AAACE]/30 rounded-3xl p-6 shadow-md">
+            <div className="clay-card p-6">
               <h3 className="font-extrabold text-[#0A2540] text-lg mb-2">RMSE (Root Mean Squared Error)</h3>
               <p className="text-sm text-[#476685] mb-4 font-semibold">Square root of MSE. Brings the error metric back to the same unit as the target variable (Lakhs).</p>
               <div className="bg-[#F0FCFF] p-3 rounded-xl border border-[#7AAACE]/30 font-mono text-xs text-center text-[#0A2540] font-bold">
@@ -289,7 +274,7 @@ export default function ModelWorks() {
               </div>
             </div>
 
-            <div className="bg-white/40 border border-[#7AAACE]/30 rounded-3xl p-6 shadow-md">
+            <div className="clay-card p-6">
               <h3 className="font-extrabold text-[#0A2540] text-lg mb-2">MAE (Mean Absolute Error)</h3>
               <p className="text-sm text-[#476685] mb-4 font-semibold">Average of absolute differences between predicted and actual values. Easier to interpret directly.</p>
               <div className="bg-[#F0FCFF] p-3 rounded-xl border border-[#7AAACE]/30 font-mono text-xs text-center text-[#0A2540] font-bold">
@@ -297,7 +282,7 @@ export default function ModelWorks() {
               </div>
             </div>
 
-            <div className="bg-white/40 border border-[#7AAACE]/30 rounded-3xl p-6 shadow-md">
+            <div className="clay-card p-6">
               <h3 className="font-extrabold text-[#0A2540] text-lg mb-2">R&sup2; (R-Squared)</h3>
               <p className="text-sm text-[#476685] mb-4 font-semibold">Proportion of the variance in the dependent variable that is predictable from the independent variables.</p>
               <div className="bg-[#F0FCFF] p-3 rounded-xl border border-[#7AAACE]/30 font-mono text-xs text-center text-[#0A2540] font-bold">
@@ -310,7 +295,7 @@ export default function ModelWorks() {
         {/* 3. Live Metrics & Feature Weights */}
         <section className="grid md:grid-cols-3 gap-8">
           {/* Live metrics card */}
-          <div className="bg-white border border-[#7AAACE]/30 rounded-3xl p-10 flex flex-col justify-between shadow-md">
+          <div className="clay-card p-10 flex flex-col justify-between">
             <div>
               <h3 className="text-2xl font-black text-[#0A2540] mb-8 flex items-center gap-3">
                 <LineChart className="text-[#58E0FF] w-6 h-6" /> Live Model Accuracy
@@ -359,7 +344,7 @@ export default function ModelWorks() {
           </div>
 
           {/* Feature Weights Chart */}
-          <div className="md:col-span-2 bg-white/40 border border-[#7AAACE]/30 rounded-3xl p-10 flex flex-col justify-between backdrop-blur-md shadow-md">
+          <div className="md:col-span-2 clay-card p-10 flex flex-col justify-between backdrop-blur-md">
             <div>
               <h3 className="text-2xl font-black text-[#0A2540] mb-3 flex items-center gap-3">
                 <BrainCircuit className="text-[#58E0FF] w-6 h-6" /> Regressor Coefficient Weights
@@ -407,7 +392,7 @@ export default function ModelWorks() {
         </section>
 
         {/* 4. Prediction Accuracy Scatter Plot */}
-        <section className="mt-12 bg-white border border-[#7AAACE]/30 rounded-3xl p-10 shadow-md">
+        <section className="mt-12 clay-card p-10">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h3 className="text-2xl font-black text-[#0A2540] flex items-center gap-3 mb-2">

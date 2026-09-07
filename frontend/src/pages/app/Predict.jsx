@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
@@ -6,6 +7,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsToolti
 import { Info, Share2, Download, Copy, Calculator, TrendingUp, ShieldCheck } from 'lucide-react';
 
 const Predict = () => {
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [result, setResult] = useState(null);
@@ -17,6 +19,15 @@ const Predict = () => {
     Car_Parking_Sqft: 120,
     Bedrooms: 2
   });
+
+  useEffect(() => {
+    if (location.state?.prediction) {
+      const pred = location.state.prediction;
+      setFormData(pred.input_features);
+      setResult(pred);
+      setSimulatedArea(pred.input_features.Area_Sqft);
+    }
+  }, [location.state]);
 
   // Simulator State
   const [simulatedArea, setSimulatedArea] = useState(1000);

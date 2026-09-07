@@ -16,6 +16,22 @@ const Navbar = ({ onMenuClick }) => {
     { name: 'How It Works', path: '/how-it-works' }
   ];
 
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return localStorage.getItem('theme') === 'dark' || document.documentElement.classList.contains('dark');
+  });
+
+  const toggleTheme = () => {
+    const newTheme = !isDarkMode;
+    setIsDarkMode(newTheme);
+    if (newTheme) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  };
+
   return (
     <header className="h-[72px] border-b border-white/40 dark:border-slate-800/60 bg-white/70 dark:bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50 shadow-[0_4px_30px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.2)] transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
@@ -23,7 +39,7 @@ const Navbar = ({ onMenuClick }) => {
         <div className="flex items-center gap-4">
           {/* Logo */}
           <Link to="/" className="flex items-center group">
-            <img src="/new-logo.png" alt="FlatVision Logo" className="h-20 md:h-[5.5rem] -ml-2 mix-blend-multiply dark:mix-blend-normal drop-shadow-sm group-hover:scale-105 transition-transform" />
+            <img src="/new-logo.png" alt="FlatVision Logo" className="h-24 md:h-[6.5rem] -ml-2 mix-blend-multiply dark:mix-blend-normal drop-shadow-sm group-hover:scale-105 transition-transform no-invert" />
           </Link>
         </div>
         
@@ -57,11 +73,13 @@ const Navbar = ({ onMenuClick }) => {
         
         {/* Right Actions */}
         <div className="flex items-center gap-2 sm:gap-4">
-           <div className="relative hidden sm:block">
-              <button className="text-slate-500 hover:text-slate-800 transition-colors">
-                 <Bell className="w-5 h-5" />
+           <div className="relative">
+              <button 
+                onClick={toggleTheme}
+                className="text-slate-500 hover:text-slate-800 transition-colors p-2 rounded-full hover:bg-slate-100 no-invert"
+              >
+                 {isDarkMode ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5" />}
               </button>
-              <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white flex items-center justify-center text-[8px] font-bold text-white">3</div>
            </div>
            <div className="hidden sm:block h-6 w-px bg-slate-200 mx-1"></div>
            <SignedIn>
