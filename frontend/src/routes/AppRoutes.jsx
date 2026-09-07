@@ -8,7 +8,8 @@ import AppLayout from '../components/layout/AppLayout';
 
 // Public Pages
 import Home from '../pages/public/Home';
-import { Features, HowItWorks, About, Contact } from '../pages/public/SimplePages';
+import { Features, About, Contact } from '../pages/public/SimplePages';
+import ModelWorks from '../pages/ModelWorks';
 
 // Auth Pages
 import SignInPage from '../pages/auth/SignIn';
@@ -25,11 +26,13 @@ import Help from '../pages/app/Help';
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Public Routes */}
+      {/* Standalone Public Routes */}
+      <Route path="/how-it-works" element={<ModelWorks />} />
+
+      {/* Public Routes with Layout */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/features" element={<Features />} />
-        <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         

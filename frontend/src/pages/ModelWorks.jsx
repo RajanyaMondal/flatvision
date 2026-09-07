@@ -119,13 +119,8 @@ export default function ModelWorks() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 border-b border-[#7AAACE]/30 bg-[#F0FCFF]/70 backdrop-blur-xl z-50">
         <div className="container mx-auto px-6 h-20 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-3 font-bold text-xl tracking-tight hover:scale-105 transition-transform duration-200">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#58E0FF] to-[#FFC6F3] flex items-center justify-center text-[#0A2540] shadow-md shadow-[#92EEFF]/10">
-              <Building2 className="w-6 h-6" />
-            </div>
-            <span className="text-[#0A2540] text-2xl tracking-tighter font-extrabold flex items-center gap-1">
-              FlatVision<span className="text-[#00D2FF]">.AI</span>
-            </span>
+          <Link to="/" className="flex items-center group">
+            <img src="/new-logo.png" alt="FlatVision Logo" className="h-20 md:h-[5.5rem] -ml-2 mix-blend-multiply drop-shadow-sm group-hover:scale-105 transition-transform" />
           </Link>
           <MotionLink 
             to="/" 
@@ -217,6 +212,20 @@ export default function ModelWorks() {
                   </div>
                 </li>
               </ul>
+
+              <div className="mt-6 bg-[#F0FCFF] border border-[#7AAACE]/30 p-5 rounded-2xl">
+                <h4 className="font-extrabold text-[#0A2540] mb-3">Example Calculation</h4>
+                <p className="text-sm text-[#476685] mb-2 font-semibold">For a property with: <strong>Area</strong> = 1000 sqft, <strong>Bedrooms</strong> = 2, <strong>Floor</strong> = 3, <strong>Parking</strong> = 120 sqft, <strong>Facing</strong> = South</p>
+                <div className="text-sm font-mono space-y-1 text-[#0A2540]">
+                  <div><span className="text-pink-700">Area</span> = 1000 &times; 0.0608 = 60.8 Lakhs</div>
+                  <div><span className="text-pink-700">Bedrooms</span> = 2 &times; 1.1564 = 2.31 Lakhs</div>
+                  <div><span className="text-pink-700">Floor</span> = 3 &times; 0.4375 = 1.31 Lakhs</div>
+                  <div><span className="text-pink-700">Parking</span> = 120 &times; 0.0245 = 2.94 Lakhs</div>
+                  <div><span className="text-[#00D2FF]">Facing (South)</span> = 1 &times; 0.7381 = 0.74 Lakhs</div>
+                  <div className="border-t border-[#7AAACE]/30 pt-1 mt-1 font-bold">Base (Intercept) = -13.75 Lakhs</div>
+                  <div className="text-[#00D2FF] font-black text-base mt-2">Total Estimated Price = &#8377;54.35 Lakhs</div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -253,6 +262,46 @@ export default function ModelWorks() {
               <div>
                 <div className="font-extrabold text-[#58E0FF] text-xl mb-1">&beta;<sub>i</sub>x<sub>i</sub></div>
                 <span>Feature Weights × Inputs</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Error Metrics Formulas */}
+        <section className="mb-20">
+          <h2 className="text-3xl font-black text-[#0A2540] mb-8 flex items-center gap-3 tracking-tight">
+            <LineChart className="text-[#58E0FF] w-7 h-7" /> Error Metrics & Formulas
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white/40 border border-[#7AAACE]/30 rounded-3xl p-6 shadow-md">
+              <h3 className="font-extrabold text-[#0A2540] text-lg mb-2">MSE (Mean Squared Error)</h3>
+              <p className="text-sm text-[#476685] mb-4 font-semibold">Average of the squared differences between predicted and actual values. Heavily penalizes large errors.</p>
+              <div className="bg-[#F0FCFF] p-3 rounded-xl border border-[#7AAACE]/30 font-mono text-xs text-center text-[#0A2540] font-bold">
+                MSE = (1/n) &Sigma; (y - &#375;)&sup2;
+              </div>
+            </div>
+            
+            <div className="bg-white/40 border border-[#7AAACE]/30 rounded-3xl p-6 shadow-md">
+              <h3 className="font-extrabold text-[#0A2540] text-lg mb-2">RMSE (Root Mean Squared Error)</h3>
+              <p className="text-sm text-[#476685] mb-4 font-semibold">Square root of MSE. Brings the error metric back to the same unit as the target variable (Lakhs).</p>
+              <div className="bg-[#F0FCFF] p-3 rounded-xl border border-[#7AAACE]/30 font-mono text-xs text-center text-[#0A2540] font-bold">
+                RMSE = &radic;[ (1/n) &Sigma; (y - &#375;)&sup2; ]
+              </div>
+            </div>
+
+            <div className="bg-white/40 border border-[#7AAACE]/30 rounded-3xl p-6 shadow-md">
+              <h3 className="font-extrabold text-[#0A2540] text-lg mb-2">MAE (Mean Absolute Error)</h3>
+              <p className="text-sm text-[#476685] mb-4 font-semibold">Average of absolute differences between predicted and actual values. Easier to interpret directly.</p>
+              <div className="bg-[#F0FCFF] p-3 rounded-xl border border-[#7AAACE]/30 font-mono text-xs text-center text-[#0A2540] font-bold">
+                MAE = (1/n) &Sigma; |y - &#375;|
+              </div>
+            </div>
+
+            <div className="bg-white/40 border border-[#7AAACE]/30 rounded-3xl p-6 shadow-md">
+              <h3 className="font-extrabold text-[#0A2540] text-lg mb-2">R&sup2; (R-Squared)</h3>
+              <p className="text-sm text-[#476685] mb-4 font-semibold">Proportion of the variance in the dependent variable that is predictable from the independent variables.</p>
+              <div className="bg-[#F0FCFF] p-3 rounded-xl border border-[#7AAACE]/30 font-mono text-xs text-center text-[#0A2540] font-bold">
+                R&sup2; = 1 - [ &Sigma; (y - &#375;)&sup2; / &Sigma; (y - y&#772;)&sup2; ]
               </div>
             </div>
           </div>

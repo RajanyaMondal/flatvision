@@ -63,7 +63,9 @@ const Predict = () => {
          { month: 'Nov', hist: null, forecast: basePriceLakh * 1.12 }
       ];
 
-      const newPrediction = {
+      const finalPrediction = {
+        id: Math.random().toString(36).substring(7),
+        created_at: new Date().toISOString(),
         input_features: formData,
         predicted_price: mlData.predicted_price,
         model_name: mlData.model_name,
@@ -71,10 +73,14 @@ const Predict = () => {
         forecastData
       };
 
-      setResult({
-        id: Math.random().toString(36).substring(7),
-        ...newPrediction
-      });
+      setResult(finalPrediction);
+
+      try {
+        const existingHistory = JSON.parse(localStorage.getItem('predictionHistory') || '[]');
+        localStorage.setItem('predictionHistory', JSON.stringify([finalPrediction, ...existingHistory]));
+      } catch (e) {
+        console.error("Could not save prediction to history", e);
+      }
       
       setSimulatedArea(formData.Area_Sqft); // Initialize simulator
     } catch (err) {

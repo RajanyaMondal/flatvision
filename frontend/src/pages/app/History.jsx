@@ -4,11 +4,21 @@ import { Button } from '../../components/ui/Button';
 
 const History = () => {
   const [predictions, setPredictions] = useState([]);
-  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    try {
+      const storedHistory = JSON.parse(localStorage.getItem('predictionHistory') || '[]');
+      setPredictions(storedHistory);
+    } catch (e) {
+      console.error("Could not load history", e);
+    }
+  }, []);
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this prediction?")) return;
-    setPredictions(predictions.filter(p => p.id !== id));
+    const updatedPredictions = predictions.filter(p => p.id !== id);
+    setPredictions(updatedPredictions);
+    localStorage.setItem('predictionHistory', JSON.stringify(updatedPredictions));
   };
 
   return (

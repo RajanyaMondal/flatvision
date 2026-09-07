@@ -22,8 +22,8 @@ const Navbar = ({ onMenuClick }) => {
         
         <div className="flex items-center gap-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <img src="/flatvision-logo.png" alt="FlatVision Logo" className="h-16 md:h-20 -ml-2 mix-blend-multiply dark:mix-blend-normal drop-shadow-sm hover:scale-105 transition-transform" />
+          <Link to="/" className="flex items-center group">
+            <img src="/new-logo.png" alt="FlatVision Logo" className="h-20 md:h-[5.5rem] -ml-2 mix-blend-multiply dark:mix-blend-normal drop-shadow-sm group-hover:scale-105 transition-transform" />
           </Link>
         </div>
         
@@ -45,8 +45,8 @@ const Navbar = ({ onMenuClick }) => {
                 to={link.path} 
                 className={`relative px-4 py-2 text-sm font-semibold rounded-full transition-all duration-300 group
                   ${isActive 
-                    ? 'text-white bg-slate-900 dark:bg-white dark:text-slate-900 shadow-md shadow-slate-900/20 dark:shadow-white/20' 
-                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
+                    ? 'text-[#163050] bg-white shadow-sm shadow-slate-200/50 dark:bg-slate-800 dark:text-white dark:shadow-slate-900/50' 
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/50 dark:hover:bg-slate-800/50'
                   }`}
               >
                 {link.name}
