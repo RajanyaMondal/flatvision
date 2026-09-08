@@ -5,11 +5,21 @@ import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
 import { Info, Share2, Download, Copy, Calculator, TrendingUp, ShieldCheck } from 'lucide-react';
+import { z } from 'zod';
+
+const propertySchema = z.object({
+  Bedrooms: z.number().min(1).max(5, "Bedrooms must be between 1 and 5"),
+  Area_Sqft: z.number().min(100, "Area must be at least 100 Sqft").max(50000, "Area is unreasonably large"),
+  Floor: z.number().min(1, "Floor level must be at least 1").max(100, "Floor level is suspiciously high"),
+  Car_Parking_Sqft: z.number().min(0, "Car parking cannot be negative").max(2000, "Car parking area is too large"),
+  Facing: z.enum(['North', 'South', 'East', 'West'])
+});
 
 const Predict = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [validationError, setValidationError] = useState('');
   const [result, setResult] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -49,9 +59,13 @@ const Predict = () => {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setValidationError('');
     setResult(null);
     
     try {
+      // Validate input data with Zod
+      propertySchema.parse(formData);
+      
       const mlServiceUrl = import.meta.env.VITE_ML_SERVICE_URL || 'http://localhost:8000';
       const mlResponse = await fetch(`${mlServiceUrl}/predict`, {
         method: 'POST',
@@ -64,15 +78,35 @@ const Predict = () => {
 
       const basePriceLakh = mlData.predicted_price / 100000;
       
-      const forecastData = [
-         { month: 'May', hist: basePriceLakh * 0.88, forecast: basePriceLakh * 0.88 },
-         { month: 'Jun', hist: basePriceLakh * 0.92, forecast: basePriceLakh * 0.90 },
-         { month: 'Jul', hist: basePriceLakh, forecast: basePriceLakh * 0.95 },
-         { month: 'Aug', hist: null, forecast: basePriceLakh * 1.02 },
-         { month: 'Sep', hist: null, forecast: basePriceLakh * 1.06 },
-         { month: 'Oct', hist: null, forecast: basePriceLakh * 1.09 },
-         { month: 'Nov', hist: null, forecast: basePriceLakh * 1.12 }
-      ];
+      // Calculate monthly growth rate based on 7% annual appreciation (matches ROI section)
+      const monthlyGrowth = Math.pow(1.07, 1/12);
+      
+      const monthsLabel = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const currentDate = new Date();
+      const currentMonth = currentDate.getMonth();
+      
+      const forecastData = [];
+      // 3 months history
+      for (let i = -3; i <= 0; i++) {
+        const d = new Date(currentDate.getFullYear(), currentMonth + i, 1);
+        const price = basePriceLakh * Math.pow(monthlyGrowth, i);
+        forecastData.push({
+          month: monthsLabel[d.getMonth()],
+          hist: parseFloat(price.toFixed(2)),
+          forecast: i === 0 ? parseFloat(price.toFixed(2)) : null
+        });
+      }
+      
+      // 6 months forecast
+      for (let i = 1; i <= 6; i++) {
+        const d = new Date(currentDate.getFullYear(), currentMonth + i, 1);
+        const price = basePriceLakh * Math.pow(monthlyGrowth, i);
+        forecastData.push({
+          month: monthsLabel[d.getMonth()],
+          hist: null,
+          forecast: parseFloat(price.toFixed(2))
+        });
+      }
 
       const finalPrediction = {
         id: Math.random().toString(36).substring(7),
@@ -95,7 +129,11 @@ const Predict = () => {
       
       setSimulatedArea(formData.Area_Sqft); // Initialize simulator
     } catch (err) {
-      setError(err.message || 'Prediction failed to generate. Please try again.');
+      if (err instanceof z.ZodError) {
+        setValidationError(err.errors[0].message);
+      } else {
+        setError(err.message || 'Prediction failed to generate. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -195,7 +233,7 @@ Financial Insights:
             {/* Decorative element inside card */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#58E0FF]/10 to-transparent rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform duration-700"></div>
 
-            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+            <form onSubmit={handleSubmit} noValidate className="space-y-6 relative z-10">
               {error && (
                 <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-500 text-sm font-semibold rounded-[16px] backdrop-blur-md">
                   {error}
@@ -267,7 +305,7 @@ Financial Insights:
                   onChange={handleInputChange} 
                   className="block w-full rounded-[16px] bg-white/60 border border-[#7AAACE]/30 text-[#0A2540] sm:text-sm py-3 px-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#58E0FF]/50 focus:border-[#58E0FF] transition-all duration-300 backdrop-blur-md cursor-pointer hover:bg-white"
                 >
-                  {['North', 'South', 'East', 'West', 'North-East', 'North-West', 'South-East', 'South-West'].map(f => <option key={f} value={f}>{f}</option>)}
+                  {['North', 'South', 'East', 'West'].map(f => <option key={f} value={f}>{f}</option>)}
                 </select>
               </div>
 
@@ -347,23 +385,23 @@ Financial Insights:
                    <div className="space-y-6">
                       <div className="flex justify-between items-center group">
                          <span className="text-[#476685] font-bold tracking-wide group-hover:text-[#0A2540] transition-colors">Base Property Value</span>
-                         <span className="font-black text-xl text-[#0A2540]">₹{(baseValue / 100000).toFixed(2)} L</span>
+                         <span className="font-black text-xl text-[#0A2540] whitespace-nowrap">₹{(baseValue / 100000).toFixed(2)} L</span>
                       </div>
                       <div className="flex justify-between items-center group">
                          <span className="text-[#476685] font-bold tracking-wide flex items-center gap-3 group-hover:text-[#0A2540] transition-colors">Floor Premium <span className="text-xs bg-[#58E0FF]/10 text-[#00D2FF] px-3 py-1 rounded-[10px] font-black border border-[#7AAACE]/30">Level {formData.Floor}</span></span>
-                         <span className="font-black text-xl text-[#00D2FF]">+₹{(floorPremium / 100000).toFixed(2)} L</span>
+                         <span className="font-black text-xl text-[#00D2FF] whitespace-nowrap">+₹{(floorPremium / 100000).toFixed(2)} L</span>
                       </div>
                       <div className="flex justify-between items-center group">
                          <span className="text-[#476685] font-bold tracking-wide flex items-center gap-3 group-hover:text-[#0A2540] transition-colors">{formData.Facing} Facing Premium</span>
-                         <span className="font-black text-xl text-emerald-600">+₹{(facingPremium / 100000).toFixed(2)} L</span>
+                         <span className="font-black text-xl text-emerald-600 whitespace-nowrap">+₹{(facingPremium / 100000).toFixed(2)} L</span>
                       </div>
                       <div className="flex justify-between items-center group">
                          <span className="text-[#476685] font-bold tracking-wide flex items-center gap-3 group-hover:text-[#0A2540] transition-colors">Parking Valuation <span className="text-xs bg-slate-500/10 text-slate-600 px-3 py-1 rounded-[10px] font-black border border-slate-500/20">{formData.Car_Parking_Sqft} sqft</span></span>
-                         <span className="font-black text-xl text-blue-600">+₹{(parkingValue / 100000).toFixed(2)} L</span>
+                         <span className="font-black text-xl text-blue-600 whitespace-nowrap">+₹{(parkingValue / 100000).toFixed(2)} L</span>
                       </div>
                       <div className="pt-6 border-t-2 border-dashed border-[#7AAACE]/30 flex justify-between items-center">
                          <span className="text-xl font-black text-[#0A2540] uppercase tracking-widest">Adjusted Value</span>
-                         <span className="text-4xl font-black text-[#00D2FF] drop-shadow-sm">₹{(simulatedPrice / 100000).toFixed(2)} L</span>
+                         <span className="text-3xl sm:text-4xl font-black text-[#00D2FF] drop-shadow-sm whitespace-nowrap">₹{(simulatedPrice / 100000).toFixed(2)} L</span>
                       </div>
                    </div>
                 </Card>
@@ -379,9 +417,9 @@ Financial Insights:
                    </div>
                    
                    <div className="mb-10 relative z-10">
-                      <div className="flex justify-between items-end mb-6">
-                         <div className="text-5xl font-black text-[#00D2FF] tracking-tighter">{simulatedArea} <span className="text-xl font-bold text-[#58E0FF]">sqft</span></div>
-                         <div className="text-right">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-4 sm:gap-0">
+                         <div className="text-5xl font-black text-[#00D2FF] tracking-tighter whitespace-nowrap">{simulatedArea} <span className="text-xl font-bold text-[#58E0FF]">sqft</span></div>
+                         <div className="text-left sm:text-right">
                             <div className="text-[10px] font-black text-[#476685] uppercase tracking-widest mb-1">Value per Sqft</div>
                             <div className="text-2xl font-black text-[#0A2540]">₹{Math.round(simulatedPrice / simulatedArea).toLocaleString()}</div>
                          </div>
@@ -399,9 +437,9 @@ Financial Insights:
                       </div>
                    </div>
 
-                   <div className="bg-[#F2EFE7] backdrop-blur-xl rounded-[20px] p-6 border border-[#7AAACE]/30 flex justify-between items-center shadow-md relative z-10">
-                      <span className="font-black text-[#0A2540] tracking-wide">Simulated Price</span>
-                      <span className="text-3xl font-black text-[#00D2FF]">₹{(simulatedPrice / 100000).toFixed(2)} L</span>
+                   <div className="bg-[#F2EFE7] backdrop-blur-xl rounded-[20px] p-6 border border-[#7AAACE]/30 flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-2 sm:gap-0 shadow-md relative z-10">
+                      <span className="font-black text-[#0A2540] tracking-wide whitespace-nowrap">Simulated Price</span>
+                      <span className="text-3xl sm:text-4xl font-black text-[#00D2FF] whitespace-nowrap">₹{(simulatedPrice / 100000).toFixed(2)} L</span>
                    </div>
                 </Card>
              </div>
@@ -449,16 +487,16 @@ Financial Insights:
                       <h3 className="text-2xl font-black flex items-center gap-2 mb-8 relative z-10 print:text-[#0A2540] tracking-tight">
                          Investment ROI <TrendingUp className="w-6 h-6 text-[#0A2540] print:hidden" />
                       </h3>
-                      <div className="grid grid-cols-2 gap-8 relative z-10">
-                         <div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 relative z-10">
+                         <div className="bg-white/20 p-4 sm:p-0 sm:bg-transparent rounded-2xl border border-white/20 sm:border-none">
                             <div className="text-[#0A2540]/80 print:text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">In 5 Years</div>
-                            <div className="text-4xl font-black print:text-slate-900 tracking-tighter">₹{(roi5Yr / 100000).toFixed(2)} <span className="text-xl text-[#0A2540]/90">L</span></div>
-                            <div className="text-sm font-bold text-[#0A2540] print:text-slate-600 mt-2 bg-white/20 w-fit px-3 py-1 rounded-[8px] border border-white/30">~40% Appr.</div>
+                            <div className="text-3xl sm:text-4xl font-black print:text-slate-900 tracking-tighter whitespace-nowrap">₹{(roi5Yr / 100000).toFixed(2)} <span className="text-xl text-[#0A2540]/90">L</span></div>
+                            <div className="text-sm font-bold text-[#0A2540] print:text-slate-600 mt-2 bg-white/30 sm:bg-white/20 w-fit px-3 py-1 rounded-[8px] border border-white/30 shadow-sm sm:shadow-none">~40% Appr.</div>
                          </div>
-                         <div>
+                         <div className="bg-white/20 p-4 sm:p-0 sm:bg-transparent rounded-2xl border border-white/20 sm:border-none">
                             <div className="text-[#0A2540]/80 print:text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">In 10 Years</div>
-                            <div className="text-4xl font-black print:text-slate-900 tracking-tighter">₹{(roi10Yr / 100000).toFixed(2)} <span className="text-xl text-[#0A2540]/90">L</span></div>
-                            <div className="text-sm font-bold text-[#0A2540] print:text-slate-600 mt-2 bg-white/20 w-fit px-3 py-1 rounded-[8px] border border-white/30">~96% Appr.</div>
+                            <div className="text-3xl sm:text-4xl font-black print:text-slate-900 tracking-tighter whitespace-nowrap">₹{(roi10Yr / 100000).toFixed(2)} <span className="text-xl text-[#0A2540]/90">L</span></div>
+                            <div className="text-sm font-bold text-[#0A2540] print:text-slate-600 mt-2 bg-white/30 sm:bg-white/20 w-fit px-3 py-1 rounded-[8px] border border-white/30 shadow-sm sm:shadow-none">~96% Appr.</div>
                          </div>
                       </div>
                    </Card>
@@ -493,6 +531,25 @@ Financial Insights:
           </div>
         )}
       </div>
+
+      {/* Validation Error Popup Modal */}
+      {validationError && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A2540]/40 backdrop-blur-sm transition-opacity">
+          <div className="bg-white rounded-[24px] shadow-2xl w-full max-w-md p-8 relative transform transition-all scale-100">
+            <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-6">
+              <Info className="w-8 h-8 text-red-500" />
+            </div>
+            <h3 className="text-2xl font-black text-center text-[#0A2540] mb-3 tracking-tight">The input is invalid</h3>
+            <p className="text-[#476685] font-semibold text-center mb-8 text-lg">{validationError}</p>
+            <Button 
+              onClick={() => setValidationError('')} 
+              className="w-full bg-[#0A2540] hover:bg-[#163050] text-white rounded-[16px] py-4 text-lg font-bold shadow-lg"
+            >
+              Go Back & Fix
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

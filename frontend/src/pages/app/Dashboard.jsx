@@ -68,7 +68,7 @@ const Dashboard = () => {
             const typeDistribution = Object.keys(typeCount).map(k => ({ name: k, value: typeCount[k] })).sort((a,b)=>b.value-a.value);
 
             // Scatter Data (Area vs Price)
-            const scatterData = datasetData.slice(0, 300).map(d => ({
+            const scatterData = datasetData.map(d => ({
                x: d.Area_Sqft,
                y: d.Price_Lakh
             }));
@@ -142,10 +142,10 @@ const Dashboard = () => {
       <div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[#58E0FF]/20 blur-[120px] mix-blend-multiply animate-blob animation-delay-2000"></div>
       <div className="absolute bottom-[-10%] left-[20%] w-[40%] h-[40%] rounded-full bg-[#47D8FF]/20 blur-[120px] mix-blend-multiply animate-blob animation-delay-4000"></div>
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-4">
         
         {/* 1. Header Row */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center clay-card p-8 relative overflow-hidden mb-6 transition-all duration-300">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center clay-card p-4 relative overflow-hidden mb-4 transition-all duration-300">
           <div className="relative z-10">
             <h1 className="text-3xl sm:text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#0A2540] to-[#163050] flex flex-wrap items-center gap-2 sm:gap-3 tracking-tight">
               Welcome back, {user?.firstName || 'Rai'}! <span className="text-3xl animate-wave origin-bottom-right inline-block">👋</span>
@@ -166,7 +166,7 @@ const Dashboard = () => {
         </div>
 
         {/* 2. Metrics Row (5 Cards) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
            {/* Card 1 */}
            <Card className="clay-card p-6 flex flex-col justify-between relative overflow-hidden group">
               <div className="flex justify-between items-start mb-4">
@@ -249,9 +249,9 @@ const Dashboard = () => {
         </div>
 
         {/* 3. Analytics Row (3 Cols) */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
            {/* Scatter Plot - Span 2 cols */}
-           <Card className="col-span-1 lg:col-span-2 clay-card p-8 flex flex-col">
+           <Card className="col-span-1 lg:col-span-2 clay-card p-4 flex flex-col">
               <div className="flex flex-col mb-8">
                 <div className="flex items-center gap-3">
                    <div className="w-2 h-8 bg-gradient-to-b from-[#00D2FF] to-[#58E0FF] rounded-full shadow-lg shadow-[#58E0FF]/50"></div>
@@ -261,7 +261,7 @@ const Dashboard = () => {
                    Sample distribution of property sizes vs valuation with best fit trend line.
                 </p>
               </div>
-              <div className="flex-1 min-h-[300px]">
+              <div className="w-full h-[250px] min-h-[250px]">
                  <ResponsiveContainer width="100%" height="100%">
                     <ComposedChart data={stats?.scatterData || []} margin={{ top: 10, right: 20, bottom: 0, left: -10 }}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#C2F6FF" opacity={0.6} />
@@ -278,20 +278,20 @@ const Dashboard = () => {
            </Card>
 
            {/* Doughnut Chart */}
-           <Card className="clay-card p-8 flex flex-col">
+           <Card className="clay-card p-4 flex flex-col">
               <h3 className="text-xl font-black text-[#0A2540] tracking-tight flex items-center gap-2 mb-6">
                  Dataset Distribution
               </h3>
               <div className="flex-1 flex flex-col items-center">
-                 <div className="w-full h-[300px] relative">
+                 <div className="w-full h-[150px] relative">
                     <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
                         <Pie
                           data={stats?.typeDistribution || []}
                           cx="50%"
                           cy="50%"
-                          innerRadius={85}
-                          outerRadius={115}
+                          innerRadius={50}
+                          outerRadius={70}
                           paddingAngle={5}
                           dataKey="value"
                           stroke="none"
@@ -330,7 +330,7 @@ const Dashboard = () => {
            </Card>
 
            {/* Feature Importance Bar Chart - Full width */}
-           <Card className="col-span-1 lg:col-span-3 clay-card p-8 flex flex-col">
+           <Card className="col-span-1 lg:col-span-3 clay-card p-4 flex flex-col">
               <h3 className="text-2xl font-black text-[#0A2540] tracking-tight flex items-center gap-2 mb-8">
                  Feature Importance Analysis
               </h3>
@@ -353,9 +353,9 @@ const Dashboard = () => {
            </Card>
            
            {/* 4. Trends Row (1 Col) */}
-           <div className="grid grid-cols-1 gap-8 mb-8 w-full col-span-1 lg:col-span-3">
+           <div className="grid grid-cols-1 gap-4 mb-4 w-full col-span-1 lg:col-span-3">
               {/* Price Trend */}
-             <Card className="clay-card p-8 flex flex-col">
+             <Card className="clay-card p-4 flex flex-col">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-8">
                    <div className="flex items-center gap-3 shrink-0">
                      <div className="w-2 h-8 bg-gradient-to-b from-[#00D2FF] to-[#58E0FF] rounded-full shadow-lg shadow-[#58E0FF]/50"></div>
@@ -375,7 +375,7 @@ const Dashboard = () => {
                       ))}
                    </div>
                 </div>
-                <div className="w-full h-[500px] min-h-[500px]">
+                <div className="w-full h-[150px] min-h-[150px]">
                    <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={trendData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
                         <defs>
@@ -397,7 +397,7 @@ const Dashboard = () => {
         </div>
 
         {/* 6. Footer Banner */}
-        <div className="w-full clay-accent !bg-[#00D2FF] p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+        <div className="w-full clay-accent !bg-[#00D2FF] p-4 flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden">
            <div className="flex items-center gap-5 relative z-10">
               <div className="w-16 h-16 rounded-[24px] bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center shadow-[inset_0_2px_10px_rgba(255,255,255,0.3)]">
                  <svg className="w-8 h-8 text-[#0A2540]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>

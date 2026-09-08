@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Building2, Calculator, TrendingUp, ShieldCheck, FileText, 
@@ -7,6 +7,8 @@ import {
 } from 'lucide-react';
 
 const HomePage = () => {
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#F2EFE7] font-sans selection:bg-[#00D2FF]/30 selection:text-[#0A2540]">
       
@@ -42,26 +44,14 @@ const HomePage = () => {
                   <Link to="/app/predict" className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#0A2540] hover:bg-[#0A2540]/90 text-white font-black shadow-[0_10px_30px_rgba(10,37,64,0.4)] transition-all flex items-center justify-center gap-2 text-lg hover:-translate-y-1">
                      Start Prediction <ArrowRight className="w-5 h-5 text-[#00D2FF]" />
                   </Link>
-                  <button className="w-full sm:w-auto px-8 py-4 rounded-2xl clay-card border border-[#7AAACE]/30 hover:border-[#00D2FF]/50 text-[#0A2540] font-black transition-all flex items-center justify-center gap-2 text-lg hover:-translate-y-1 group">
+                  <button 
+                     onClick={() => setIsVideoModalOpen(true)}
+                     className="w-full sm:w-auto px-8 py-4 rounded-2xl clay-card border border-[#7AAACE]/30 hover:border-[#00D2FF]/50 text-[#0A2540] font-black transition-all flex items-center justify-center gap-2 text-lg hover:-translate-y-1 group"
+                  >
                      <PlayCircle className="w-6 h-6 text-[#00D2FF] group-hover:scale-110 transition-transform" /> Watch Demo
                   </button>
                </div>
-               
-               {/* Trust Indicators */}
-               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-4">
-                  <div className="flex items-center gap-3 clay-card px-4 py-2 rounded-xl border border-[#7AAACE]/20">
-                     <ShieldCheck className="w-4 h-4 text-[#00D2FF]" />
-                     <div className="text-xs font-black text-[#0A2540]">98.4% Accuracy</div>
-                  </div>
-                  <div className="flex items-center gap-3 clay-card px-4 py-2 rounded-xl border border-[#7AAACE]/20">
-                     <BarChart3 className="w-4 h-4 text-[#00D2FF]" />
-                     <div className="text-xs font-black text-[#0A2540]">Millions of Datapoints</div>
-                  </div>
-                  <div className="flex items-center gap-3 clay-card px-4 py-2 rounded-xl border border-[#7AAACE]/20">
-                     <Lock className="w-4 h-4 text-[#00D2FF]" />
-                     <div className="text-xs font-black text-[#0A2540]">Bank-Grade Security</div>
-                  </div>
-               </div>
+
             </div>
             
             {/* Right Content (Real Image) */}
@@ -134,11 +124,7 @@ const HomePage = () => {
                </div>
             </div>
          </div>
-         
-         {/* Handwritten bottom left */}
-         <div className="absolute -bottom-10 left-10 hidden lg:block text-slate-400 font-handwriting rotate-[-5deg] text-xl">
-            Better Homes.<br/>Brighter<br/>Tomorrows.
-         </div>
+
       </section>
 
       {/* --- CORE CAPABILITIES BENTO GRID --- */}
@@ -170,12 +156,12 @@ const HomePage = () => {
                      </div>
                      <h3 className="text-3xl font-black text-[#0A2540] mb-4 tracking-tight">Predictive AI Valuation</h3>
                      <p className="text-[#476685] text-lg leading-relaxed font-bold mb-6">
-                        Stop guessing. Our proprietary XGBoost model evaluates millions of historical sales, structural data, and macroeconomic trends to pinpoint the exact market value of any property with sub-second latency.
+                        Stop guessing. Our proprietary Multiple Linear Regression model evaluates core structural features like total area, floor level, property facing, and parking space to pinpoint the exact market value of your property instantly.
                      </p>
                      <ul className="space-y-3">
-                        <li className="flex items-center gap-3 text-sm font-bold text-[#0A2540]"><CheckCircle2 className="w-5 h-5 text-[#00D2FF]" /> 98.4% Proven Accuracy</li>
-                        <li className="flex items-center gap-3 text-sm font-bold text-[#0A2540]"><CheckCircle2 className="w-5 h-5 text-[#00D2FF]" /> Sub-meter geo-spatial processing</li>
-                        <li className="flex items-center gap-3 text-sm font-bold text-[#0A2540]"><CheckCircle2 className="w-5 h-5 text-[#00D2FF]" /> Real-time market adjustments</li>
+                        <li className="flex items-center gap-3 text-sm font-bold text-[#0A2540]"><CheckCircle2 className="w-5 h-5 text-[#00D2FF]" /> Robust Scikit-Learn Pipeline</li>
+                        <li className="flex items-center gap-3 text-sm font-bold text-[#0A2540]"><CheckCircle2 className="w-5 h-5 text-[#00D2FF]" /> Instant Area & Feature Analysis</li>
+                        <li className="flex items-center gap-3 text-sm font-bold text-[#0A2540]"><CheckCircle2 className="w-5 h-5 text-[#00D2FF]" /> Comprehensive 10-Year Trajectory</li>
                      </ul>
                   </div>
 
@@ -209,16 +195,16 @@ const HomePage = () => {
                         </div>
                         <h3 className="text-xl font-black text-[#0A2540] mb-3 tracking-tight">Investment ROI</h3>
                         <p className="text-[#0A2540]/80 text-sm leading-relaxed font-bold mb-6">
-                           Calculate potential rental yields, cash-flow projections, and long-term appreciation rates effortlessly.
+                           Calculate precise 5-year and 10-year property appreciation projections for long-term investment planning.
                         </p>
                      </div>
                      <div className="bg-white/40 backdrop-blur-md rounded-2xl p-4 border border-white/50 relative z-10">
                         <div className="flex justify-between items-center mb-3">
-                           <span className="text-xs font-bold text-[#0A2540]">Rental Yield</span>
-                           <span className="text-sm font-black text-[#00D2FF]">4.8%</span>
+                           <span className="text-xs font-bold text-[#0A2540]">10-Year Appr.</span>
+                           <span className="text-sm font-black text-[#00D2FF]">96%</span>
                         </div>
                         <div className="w-full h-2 bg-white/50 rounded-full overflow-hidden">
-                           <div className="w-[60%] h-full bg-[#00D2FF] rounded-full"></div>
+                           <div className="w-full h-full bg-[#00D2FF] rounded-full"></div>
                         </div>
                      </div>
                   </div>
@@ -229,9 +215,9 @@ const HomePage = () => {
                         <div className="w-12 h-12 rounded-xl bg-white border border-[#7AAACE]/30 flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 transition-transform duration-300">
                            <MapPin className="w-6 h-6 text-[#00D2FF]" />
                         </div>
-                        <h3 className="text-xl font-black text-[#0A2540] mb-3 tracking-tight">Hyper-Local Context</h3>
+                        <h3 className="text-xl font-black text-[#0A2540] mb-3 tracking-tight">Interactive Simulator</h3>
                         <p className="text-[#476685] text-sm leading-relaxed font-bold">
-                           Our engine factor in proximity to metros, schools, and local development projects to refine valuations.
+                           Instantly adjust the property area slider to see how changes in square footage impact the final market valuation in real-time.
                         </p>
                      </div>
                   </div>
@@ -247,19 +233,19 @@ const HomePage = () => {
          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                <div className="clay-card p-8 sm:p-10 flex flex-col items-center md:items-start text-center md:text-left group hover:-translate-y-2 transition-transform duration-300">
-                  <div className="text-4xl sm:text-5xl font-black text-[#0A2540] mb-3 tracking-tighter">98.4%</div>
-                  <div className="text-[#00D2FF] font-extrabold text-lg mb-3 tracking-wide uppercase">Prediction Accuracy</div>
-                  <p className="text-[#476685] text-sm leading-relaxed font-bold">Powered by state-of-the-art XGBoost algorithms trained on verified property registrations.</p>
+                  <div className="text-4xl sm:text-5xl font-black text-[#0A2540] mb-3 tracking-tighter">FastAPI</div>
+                  <div className="text-[#00D2FF] font-extrabold text-lg mb-3 tracking-wide uppercase">Backend Architecture</div>
+                  <p className="text-[#476685] text-sm leading-relaxed font-bold">Built with a scalable FastAPI backend, delivering sub-second prediction latency directly from our Python AI models.</p>
                </div>
                <div className="clay-card p-8 sm:p-10 flex flex-col items-center md:items-start text-center md:text-left group hover:-translate-y-2 transition-transform duration-300">
-                  <div className="text-4xl sm:text-5xl font-black text-[#0A2540] mb-3 tracking-tighter">2.5M+</div>
-                  <div className="text-[#00D2FF] font-extrabold text-lg mb-3 tracking-wide uppercase">Data Points Analyzed</div>
-                  <p className="text-[#476685] text-sm leading-relaxed font-bold">Continuous ingestion of real-time market trends, local infrastructure, and historical sales.</p>
+                  <div className="text-4xl sm:text-5xl font-black text-[#0A2540] mb-3 tracking-tighter">Scikit</div>
+                  <div className="text-[#00D2FF] font-extrabold text-lg mb-3 tracking-wide uppercase">Machine Learning</div>
+                  <p className="text-[#476685] text-sm leading-relaxed font-bold">Powered by robust Multiple Linear Regression algorithms trained and optimized via Scikit-Learn pipelines.</p>
                </div>
                <div className="clay-card p-8 sm:p-10 flex flex-col items-center md:items-start text-center md:text-left group hover:-translate-y-2 transition-transform duration-300">
-                  <div className="text-4xl sm:text-5xl font-black text-[#0A2540] mb-3 tracking-tighter">Enterprise</div>
-                  <div className="text-[#00D2FF] font-extrabold text-lg mb-3 tracking-wide uppercase">Grade Architecture</div>
-                  <p className="text-[#476685] text-sm leading-relaxed font-bold">Built with a scalable FastAPI backend, delivering sub-second prediction latency worldwide.</p>
+                  <div className="text-4xl sm:text-5xl font-black text-[#0A2540] mb-3 tracking-tighter">React</div>
+                  <div className="text-[#00D2FF] font-extrabold text-lg mb-3 tracking-wide uppercase">Interactive UI</div>
+                  <p className="text-[#476685] text-sm leading-relaxed font-bold">Engineered with a modern React stack, featuring interactive Recharts, Zod validation, and real-time valuation simulators.</p>
                </div>
             </div>
          </div>
@@ -326,6 +312,39 @@ const HomePage = () => {
           50% { transform: translateY(-15px); }
         }
       `}</style>
+
+      {/* --- VIDEO DEMO MODAL --- */}
+      {isVideoModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A2540]/80 backdrop-blur-sm transition-opacity">
+          <div className="bg-[#F2EFE7] rounded-[32px] w-full max-w-5xl shadow-2xl overflow-hidden relative transform transition-all scale-100">
+            <div className="flex justify-between items-center p-6 border-b border-[#7AAACE]/30 bg-white/60 backdrop-blur-md">
+               <h3 className="font-black text-[#0A2540] text-xl flex items-center gap-2">
+                 <PlayCircle className="w-6 h-6 text-[#00D2FF]" /> Website Demo
+               </h3>
+               <button 
+                 onClick={() => setIsVideoModalOpen(false)} 
+                 className="text-[#476685] hover:text-red-500 font-bold px-4 py-2 rounded-xl hover:bg-red-50 transition-colors"
+               >
+                 Close
+               </button>
+            </div>
+            <div className="aspect-video w-full bg-slate-900 relative flex items-center justify-center">
+               {/* Website Demo Recorded Walkthrough */}
+               <video 
+                 className="w-full h-full object-cover" 
+                 controls 
+                 autoPlay 
+                 src="/demo.webp"
+               >
+                 <p className="text-white text-center p-10 font-bold">
+                   Demo video not found.
+                 </p>
+               </video>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
