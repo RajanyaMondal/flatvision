@@ -4,14 +4,14 @@ import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
-import { Info, Share2, Download, Copy, Calculator, TrendingUp, ShieldCheck } from 'lucide-react';
+import { Info, Share2, Download, Copy, Calculator, TrendingUp, ShieldCheck, Minus, Plus } from 'lucide-react';
 import { z } from 'zod';
 
 const propertySchema = z.object({
-  Bedrooms: z.number().min(1).max(5, "Bedrooms must be between 1 and 5"),
-  Area_Sqft: z.number().min(100, "Area must be at least 100 Sqft").max(50000, "Area is unreasonably large"),
-  Floor: z.number().min(1, "Floor level must be at least 1").max(100, "Floor level is suspiciously high"),
-  Car_Parking_Sqft: z.number().min(0, "Car parking cannot be negative").max(2000, "Car parking area is too large"),
+  Bedrooms: z.coerce.number().min(1).max(5, "Bedrooms must be between 1 and 5"),
+  Area_Sqft: z.coerce.number().min(100, "Area must be at least 100 Sqft").max(50000, "Area is unreasonably large"),
+  Floor: z.coerce.number().min(1, "Floor level must be at least 1").max(100, "Floor level is suspiciously high"),
+  Car_Parking_Sqft: z.coerce.number().min(0, "Car parking cannot be negative").max(2000, "Car parking area is too large"),
   Facing: z.enum(['North', 'South', 'East', 'West'])
 });
 
@@ -46,6 +46,16 @@ const Predict = () => {
   const [downPaymentPct, setDownPaymentPct] = useState(20);
   const [interestRate, setInterestRate] = useState(8.5);
   const [loanTenure, setLoanTenure] = useState(15);
+
+  const handleStep = (name, step, min, max) => {
+    setFormData(prev => {
+      const current = Number(prev[name]) || 0;
+      let next = current + step;
+      if (next < min) next = min;
+      if (max && next > max) next = max;
+      return { ...prev, [name]: next };
+    });
+  };
 
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
@@ -258,42 +268,54 @@ Financial Insights:
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-[#476685] mb-2 tracking-wide">Area (Sqft)</label>
-                  <input
-                    type="number" 
-                    name="Area_Sqft" 
-                    value={formData.Area_Sqft} 
-                    onChange={handleInputChange} 
-                    min="100" 
-                    required 
-                    className="block w-full rounded-[16px] bg-white/60 border border-[#7AAACE]/30 text-[#0A2540] sm:text-sm py-3 px-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#58E0FF]/50 focus:border-[#58E0FF] transition-all duration-300 backdrop-blur-md hover:bg-white"
-                  />
+                  <div className="relative flex items-center">
+                    <button type="button" onClick={() => handleStep('Area_Sqft', -50, 100, 50000)} className="absolute left-2 p-1.5 text-[#476685] hover:text-[#00D2FF] hover:bg-slate-100 rounded-xl transition-colors z-10 focus:outline-none shadow-sm bg-white"><Minus className="w-4 h-4" /></button>
+                    <input
+                      type="number" 
+                      name="Area_Sqft" 
+                      value={formData.Area_Sqft} 
+                      onChange={handleInputChange} 
+                      min="100" 
+                      required 
+                      className="block w-full text-center rounded-[16px] bg-white/60 border border-[#7AAACE]/30 text-[#0A2540] sm:text-sm py-3 px-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#58E0FF]/50 focus:border-[#58E0FF] transition-all duration-300 backdrop-blur-md hover:bg-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    />
+                    <button type="button" onClick={() => handleStep('Area_Sqft', 50, 100, 50000)} className="absolute right-2 p-1.5 text-[#476685] hover:text-[#00D2FF] hover:bg-slate-100 rounded-xl transition-colors z-10 focus:outline-none shadow-sm bg-white"><Plus className="w-4 h-4" /></button>
+                  </div>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-bold text-[#476685] mb-2 tracking-wide">Floor Level</label>
-                  <input
-                    type="number" 
-                    name="Floor" 
-                    value={formData.Floor} 
-                    onChange={handleInputChange} 
-                    min="1" 
-                    required 
-                    className="block w-full rounded-[16px] bg-white/60 border border-[#7AAACE]/30 text-[#0A2540] sm:text-sm py-3 px-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#58E0FF]/50 focus:border-[#58E0FF] transition-all duration-300 backdrop-blur-md hover:bg-white"
-                  />
+                  <div className="relative flex items-center">
+                    <button type="button" onClick={() => handleStep('Floor', -1, 1, 100)} className="absolute left-2 p-1.5 text-[#476685] hover:text-[#00D2FF] hover:bg-slate-100 rounded-xl transition-colors z-10 focus:outline-none shadow-sm bg-white"><Minus className="w-4 h-4" /></button>
+                    <input
+                      type="number" 
+                      name="Floor" 
+                      value={formData.Floor} 
+                      onChange={handleInputChange} 
+                      min="1" 
+                      required 
+                      className="block w-full text-center rounded-[16px] bg-white/60 border border-[#7AAACE]/30 text-[#0A2540] sm:text-sm py-3 px-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#58E0FF]/50 focus:border-[#58E0FF] transition-all duration-300 backdrop-blur-md hover:bg-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    />
+                    <button type="button" onClick={() => handleStep('Floor', 1, 1, 100)} className="absolute right-2 p-1.5 text-[#476685] hover:text-[#00D2FF] hover:bg-slate-100 rounded-xl transition-colors z-10 focus:outline-none shadow-sm bg-white"><Plus className="w-4 h-4" /></button>
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-[#476685] mb-2 tracking-wide">Car Parking (Sqft)</label>
-                  <input
-                    type="number" 
-                    name="Car_Parking_Sqft" 
-                    value={formData.Car_Parking_Sqft} 
-                    onChange={handleInputChange} 
-                    min="0" 
-                    required 
-                    className="block w-full rounded-[16px] bg-white/60 border border-[#7AAACE]/30 text-[#0A2540] sm:text-sm py-3 px-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#58E0FF]/50 focus:border-[#58E0FF] transition-all duration-300 backdrop-blur-md hover:bg-white"
-                  />
+                  <div className="relative flex items-center">
+                    <button type="button" onClick={() => handleStep('Car_Parking_Sqft', -10, 0, 2000)} className="absolute left-2 p-1.5 text-[#476685] hover:text-[#00D2FF] hover:bg-slate-100 rounded-xl transition-colors z-10 focus:outline-none shadow-sm bg-white"><Minus className="w-4 h-4" /></button>
+                    <input
+                      type="number" 
+                      name="Car_Parking_Sqft" 
+                      value={formData.Car_Parking_Sqft} 
+                      onChange={handleInputChange} 
+                      min="0" 
+                      required 
+                      className="block w-full text-center rounded-[16px] bg-white/60 border border-[#7AAACE]/30 text-[#0A2540] sm:text-sm py-3 px-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#58E0FF]/50 focus:border-[#58E0FF] transition-all duration-300 backdrop-blur-md hover:bg-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    />
+                    <button type="button" onClick={() => handleStep('Car_Parking_Sqft', 10, 0, 2000)} className="absolute right-2 p-1.5 text-[#476685] hover:text-[#00D2FF] hover:bg-slate-100 rounded-xl transition-colors z-10 focus:outline-none shadow-sm bg-white"><Plus className="w-4 h-4" /></button>
+                  </div>
                 </div>
               </div>
 

@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
-import { Moon, Sun, Bell, ArrowRight, Menu, X } from 'lucide-react';
+import { Moon, Sun, Bell, ArrowRight, Menu, X, Home, LayoutDashboard, Sparkles, History, HelpCircle } from 'lucide-react';
 
 const Navbar = ({ onMenuClick }) => {
   const location = useLocation();
   const isDashboard = location.pathname.startsWith('/app');
   
   const activeLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Dashboard', path: '/app' },
-    { name: 'Start Prediction', path: '/app/predict' },
-    { name: 'History', path: '/app/history' },
-    { name: 'How It Works', path: '/how-it-works' }
+    { name: 'Home', path: '/', icon: Home },
+    { name: 'Dashboard', path: '/app', icon: LayoutDashboard },
+    { name: 'Start Prediction', path: '/app/predict', icon: Sparkles },
+    { name: 'History', path: '/app/history', icon: History },
+    { name: 'How It Works', path: '/how-it-works', icon: HelpCircle }
   ];
 
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -43,7 +43,7 @@ const Navbar = ({ onMenuClick }) => {
         </div>
         
         {/* Navigation Links */}
-        <nav className="flex items-center gap-2 sm:gap-6 flex-1 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden mx-2 sm:mx-6">
+        <nav className="flex items-center justify-center gap-2 sm:gap-6 flex-1 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden mx-2 sm:mx-6">
           {activeLinks.map(link => {
             let isActive = false;
             if (isDashboard) {
@@ -58,13 +58,13 @@ const Navbar = ({ onMenuClick }) => {
               <Link 
                 key={link.name}
                 to={link.path} 
-                className={`relative px-4 py-2 text-sm font-semibold rounded-full transition-all duration-300 group
+                className={`relative p-2.5 sm:p-3 rounded-full transition-all duration-300 group flex items-center justify-center
                   ${isActive 
                     ? 'text-[#163050] bg-white shadow-sm shadow-slate-200/50 dark:bg-slate-800 dark:text-white dark:shadow-slate-900/50' 
                     : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/50 dark:hover:bg-slate-800/50'
                   }`}
               >
-                {link.name}
+                <link.icon className={`w-5 h-5 shrink-0 transition-colors ${isActive ? 'text-[#00D2FF]' : 'group-hover:text-[#00D2FF]'}`} />
               </Link>
             );
           })}

@@ -329,12 +329,16 @@ const HomePage = () => {
                </button>
             </div>
             <div className="aspect-video w-full bg-slate-900 relative flex items-center justify-center">
-               {/* Website Demo Recorded Walkthrough */}
+               {/* 
+                  NOTE: The automated recording failed due to server capacity limits, 
+                  so this is a placeholder video. Please record your screen and place 
+                  it in frontend/public/demo.mp4.
+               */}
                <video 
                  className="w-full h-full object-cover" 
                  controls 
                  autoPlay 
-                 src="/demo.webp"
+                 src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
                >
                  <p className="text-white text-center p-10 font-bold">
                    Demo video not found.
