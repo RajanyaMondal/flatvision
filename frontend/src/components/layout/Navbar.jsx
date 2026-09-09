@@ -4,7 +4,6 @@ import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
 import { Moon, Sun, Bell, ArrowRight, Menu, X } from 'lucide-react';
 
 const Navbar = ({ onMenuClick }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const isDashboard = location.pathname.startsWith('/app');
   
@@ -44,7 +43,7 @@ const Navbar = ({ onMenuClick }) => {
         </div>
         
         {/* Navigation Links */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="flex items-center gap-2 sm:gap-6 flex-1 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden mx-2 sm:mx-6">
           {activeLinks.map(link => {
             let isActive = false;
             if (isDashboard) {
@@ -98,59 +97,11 @@ const Navbar = ({ onMenuClick }) => {
               </Link>
            </SignedOut>
 
-          {/* Mobile Menu Toggle Button */}
-          <button 
-            className="md:hidden p-1 text-slate-600 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors ml-1"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
         </div>
 
       </div>
 
-      {/* Mobile Navigation Dropdown */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-[72px] left-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-2xl px-4 py-6 flex flex-col gap-3 max-h-[calc(100vh-72px)] overflow-y-auto animate-in slide-in-from-top-2 fade-in duration-200">
-          {activeLinks.map(link => {
-            let isActive = false;
-            if (isDashboard) {
-               isActive = location.pathname === link.path || (link.path !== '/' && link.path !== '/app' && location.pathname.startsWith(link.path));
-               if (location.pathname === '/app' && link.path === '/app') isActive = true;
-               if (location.pathname !== '/app' && link.path === '/app') isActive = false;
-            } else {
-               isActive = location.pathname === link.path;
-            }
 
-            return (
-              <Link 
-                key={link.name}
-                to={link.path} 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`py-3 px-5 text-[15px] font-bold rounded-2xl transition-all flex items-center justify-between
-                  ${isActive 
-                    ? 'bg-slate-900 text-white shadow-md' 
-                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
-                  }`}
-              >
-                {link.name}
-                {isActive && <ArrowRight className="w-4 h-4 opacity-50" />}
-              </Link>
-            );
-          })}
-          <SignedOut>
-             <div className="mt-4 pt-6 border-t border-slate-100">
-               <Link 
-                 to="/app/predict" 
-                 onClick={() => setIsMobileMenuOpen(false)}
-                 className="flex justify-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-4 rounded-full text-[15px] font-bold shadow-lg shadow-indigo-500/30 active:scale-95 transition-transform"
-               >
-                 Get Started Now
-               </Link>
-             </div>
-          </SignedOut>
-        </div>
-      )}
     </header>
   );
 };
